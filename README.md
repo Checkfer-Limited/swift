@@ -108,29 +108,29 @@ _You can enable the following settings in Xcode by running [this script](resourc
     public func executeRequest(
       _ request: URLRequest,
       onSuccess: @escaping (ModelType, Bool) -> Void,
-      onFailure: @escaping (Error) -> Void) -> URLSessionCancellable
-    {
-      return _executeRequest(request, session, parser, onSuccess, onFailure)
+      onFailure: @escaping (Error) -> Void) -> URLSessionCancellable {
+      	return _executeRequest(request, session, parser, onSuccess, onFailure)
     }
-
-    private let _executeRequest: (
+  
+  private let _executeRequest: (
       URLRequest,
       @escaping (ModelType, Bool) -> Void,
       @escaping (NSError) -> Void) -> URLSessionCancellable
-
-  }
+  
+}
   ```
-
-  - Backing a less specific type with a more specific type
-
-  ```swift
+  
+- Backing a less specific type with a more specific type
+  
+```swift
   final class ExperiencesViewController: UIViewController {
     // We can't name this view since UIViewController has a view: UIView property.
     private lazy var _view = CustomView()
-
-    loadView() {
+  
+  loadView() {
       self.view = _view
     }
+    
   }
   ```
 
@@ -145,31 +145,33 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```swift
   // WRONG
   class UrlValidator {
-
+  
     func isValidUrl(_ URL: URL) -> Bool {
       // ...
     }
-
+  
     func isProfileUrl(_ URL: URL, for userId: String) -> Bool {
       // ...
     }
+    
   }
-
+  
   let URLValidator = UrlValidator()
   let isProfile = URLValidator.isProfileUrl(URLToTest, userId: IDOfUser)
-
+  
   // RIGHT
   class URLValidator {
-
+  
     func isValidURL(_ url: URL) -> Bool {
       // ...
     }
-
+  
     func isProfileURL(_ url: URL, for userID: String) -> Bool {
       // ...
     }
+    
   }
-
+  
   let urlValidator = URLValidator()
   let isProfile = urlValidator.isProfileUrl(urlToTest, userID: idOfUser)
   ```
@@ -219,26 +221,28 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```swift
   // WRONG
   class ExperiencesViewController {
-
+  
     private func handleBookButtonTap() {
       // ...
     }
-
+  
     private func modelChanged() {
       // ...
     }
+    
   }
-
+  
   // RIGHT
   class ExperiencesViewController {
-
+  
     private func didTapBookButton() {
       // ...
     }
-
+  
     private func modelDidChange() {
       // ...
     }
+    
   }
   ```
 
@@ -309,33 +313,34 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   ```swift
   final class Listing {
-
+  
     init(capacity: Int, allowsPets: Bool) {
       // WRONG
       self.capacity = capacity
       self.isFamilyFriendly = !allowsPets // `self.` not required here
-
+  
       // RIGHT
       self.capacity = capacity
       isFamilyFriendly = !allowsPets
     }
-
+  
     private let isFamilyFriendly: Bool
     private var capacity: Int
-
+  
     private func increaseCapacity(by amount: Int) {
       // WRONG
       self.capacity += amount
-
+  
       // RIGHT
       capacity += amount
-
+  
       // WRONG
       self.save()
-
+  
       // RIGHT
       save()
     }
+    
   }
   ```
 
@@ -348,7 +353,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```swift
   //WRONG
   class MyClass {
-
+  
     func request(completion: () -> Void) {
       API.request() { [weak self] response in
         guard let strongSelf = self else { return }
@@ -356,11 +361,12 @@ _You can enable the following settings in Xcode by running [this script](resourc
         completion()
       }
     }
+    
   }
-
+  
   // RIGHT
   class MyClass {
-
+  
     func request(completion: () -> Void) {
       API.request() { [weak self] response in
         guard let self = self else { return }
@@ -368,6 +374,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
         completion()
       }
     }
+    
   }
   ```
 
@@ -660,24 +667,26 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```swift
   // WRONG
   class MyClass: NSObject {
-
+  
     init() {
       super.init()
       someValue = 5
     }
-
+  
     var someValue: Int!
+    
   }
-
+  
   // RIGHT
   class MyClass: NSObject {
-
+  
     init() {
       someValue = 0
       super.init()
     }
-
+  
     var someValue: Int
+    
   }
   ```
 
@@ -692,30 +701,34 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```swift
   // WRONG
   class TextField {
+    
     var text: String? {
       didSet {
         guard oldValue != text else {
           return
         }
-
+  
         // Do a bunch of text-related side-effects.
       }
     }
+    
   }
-
+  
   // RIGHT
   class TextField {
+    
     var text: String? {
       didSet { textDidUpdate(from: oldValue) }
     }
-
+  
     private func textDidUpdate(from oldValue: String?) {
       guard oldValue != text else {
         return
       }
-
+  
       // Do a bunch of text-related side-effects.
     }
+    
   }
   ```
 
@@ -728,7 +741,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```swift
   //WRONG
   class MyClass {
-
+  
     func request(completion: () -> Void) {
       API.request() { [weak self] response in
         if let self = self {
@@ -737,11 +750,12 @@ _You can enable the following settings in Xcode by running [this script](resourc
         completion()
       }
     }
+    
   }
-
+  
   // RIGHT
   class MyClass {
-
+  
     func request(completion: () -> Void) {
       API.request() { [weak self] response in
         guard let self = self else { return }
@@ -749,10 +763,11 @@ _You can enable the following settings in Xcode by running [this script](resourc
         completion()
       }
     }
-
+  
     func doSomething(nonOptionalParameter: SomeClass) {
       // Processing and side effects
     }
+    
   }
   ```
 
@@ -778,22 +793,23 @@ _You can enable the following settings in Xcode by running [this script](resourc
   func age(of person, bornAt timeInterval) -> Int {
     // ...
   }
-
+  
   func jump(person: Person) {
     // ...
   }
-
+  
   // RIGHT
   class Person {
     var bornAt: TimeInterval
-
+  
     var age: Int {
       // ...
     }
-
+  
     func jump() {
       // ...
     }
+    
   }
   ```
 
@@ -805,15 +821,16 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   ```swift
   private let privateValue = "secret"
-
+  
   public class MyClass {
-
+  
     public static let publicValue = "something"
-
+  
     func doSomething() {
       print(privateValue)
       print(MyClass.publicValue)
     }
+    
   }
   ```
 
@@ -828,14 +845,15 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   ```swift
   enum Environment {
-
+  
     enum Earth {
       static let gravity = 9.8
     }
-
+  
     enum Moon {
       static let gravity = 1.6
     }
+    
   }
   ```
 
