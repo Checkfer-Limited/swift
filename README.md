@@ -1322,27 +1322,24 @@ var thing: Thing?
 
   
 
-  
   ```swift
-class PriceBreakdownViewController {
-  
-  private let acceptButton = UIButton()
-  
+  class PriceBreakdownViewController {
+
+    private let acceptButton = UIButton()
+
     private func setUpAcceptButton() {
       acceptButton.addTarget(
         self,
         action: #selector(didTapAcceptButton),
         forControlEvents: .TouchUpInside)
-  }
-  
+    }
+
     @objc
     private func didTapAcceptButton() {
       // ...
     }
   }
-```
-  
-  
+  ```
 
 **[⬆ back to top](#table-of-contents)**
 
