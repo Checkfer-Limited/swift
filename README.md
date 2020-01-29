@@ -62,83 +62,83 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   
 
-  ```swift
+  	```swift
 	protocol SpaceThing {
-  	// ...
-  }
+  		// ...
+  	}
   
-  class SpaceFleet: SpaceThing {
+	class SpaceFleet: SpaceThing {
+	  
+		enum Formation {
+			// ...
+		}
+		  
+		class Spaceship {
+			// ...
+		}
+		  
+		var ships: [Spaceship] = []
+		static let worldName: String = "Earth"
+		  
+		func addShip(_ ship: Spaceship) {
+			// ...
+		}
   
-    enum Formation {
-      // ...
-    }
+	}
   
-    class Spaceship {
-      // ...
-    }
-  
-    var ships: [Spaceship] = []
-    static let worldName: String = "Earth"
-  
-    func addShip(_ ship: Spaceship) {
-      // ...
-    }
-      
-  }
-  
-  let myFleet = SpaceFleet()
-  ```
+	let myFleet = SpaceFleet()
+	```
   
 
 _Exception: You may prefix a private property with an underscore if it is backing an identically-named property or method with a higher access level_
 
 
 
-  #### Why?
+#### Why?
 There are specific scenarios where a backing a property or method could be easier to read than using a more descriptive name.
 
   - Type erasure
 
-  ```swift
-public final class AnyRequester<ModelType>: Requester {
+	```swift
+	public final class AnyRequester<ModelType>: Requester {
 
-  public init<T: Requester>(_ requester: T) where T.ModelType == ModelType {
-    _executeRequest = requester.executeRequest
-  }
+	public init<T: Requester>(_ requester: T) where T.ModelType == ModelType {
+		_executeRequest = requester.executeRequest
+	}
 
-  @discardableResult
-  public func executeRequest(
-    _ request: URLRequest,
-    onSuccess: @escaping (ModelType, Bool) -> Void,
-    onFailure: @escaping (Error) -> Void) -> URLSessionCancellable {
-    return _executeRequest(request, session, parser, onSuccess, onFailure)
-  }
+	@discardableResult
+	public func executeRequest(
+		_ request: URLRequest,
+		onSuccess: @escaping (ModelType, Bool) -> Void,
+		onFailure: @escaping (Error) -> Void) -> URLSessionCancellable {
+			return _executeRequest(request, session, parser, onSuccess, onFailure)
+	}
 
-  private let _executeRequest: (
-    URLRequest,
-    @escaping (ModelType, Bool) -> Void,
-    @escaping (NSError) -> Void) -> URLSessionCancellable {
-
-  }
-
-}
-  ```
+	private let _executeRequest: (
+		URLRequest,
+		@escaping (ModelType, Bool) -> Void,
+		@escaping (NSError) -> Void) -> URLSessionCancellable {
+		
+	}
+		
+	```
 
 
 
   - Backing a less specific type with a more specific type
 
-  ```swift
-final class ExperiencesViewController: UIViewController {
-  // We can't name this view since UIViewController has a view: UIView property.
-  private lazy var _view = CustomView()
 
-  override func loadView() {
-    self.view = _view
-  }
-
-}
-  ```
+	```swift
+	final class ExperiencesViewController: UIViewController {
+		// We can't name this view since UIViewController has a view: UIView property.
+		private lazy var _view = CustomView()
+		
+		override func loadView() {
+			self.view = _view
+		}
+		
+	}
+	```
 
 
 
@@ -150,43 +150,43 @@ final class ExperiencesViewController: UIViewController {
 
   
 
-  *Not preferred:*
+	*Not preferred:*
 
-  ```swift
-  class UrlValidator {
-  
-    func isValidUrl(_ URL: URL) -> Bool {
-      // ...
-    }
-    
-    func isProfileUrl(_ URL: URL, for userId: String) -> Bool {
-      // ...
-    }
-  
-  }
-  
-  let URLValidator = UrlValidator()
-  let isProfile = URLValidator.isProfileUrl(URLToTest, userId: IDOfUser)
-  ```
+	```swift
+	class UrlValidator {
+	  
+		func isValidUrl(_ URL: URL) -> Bool {
+			// ...
+		}
+		    
+		func isProfileUrl(_ URL: URL, for userId: String) -> Bool {
+			// ...
+		}
+	  
+	}
+	  
+	let URLValidator = UrlValidator()
+	let isProfile = URLValidator.isProfileUrl(URLToTest, userId: IDOfUser)
+	```
 
-  *Preferred:*
+	*Preferred:*
 
-  ```swift
-class URLValidator {
-  
-    func isValidURL(_ url: URL) -> Bool {
-      // ...
-    }
-  
-    func isProfileURL(_ url: URL, for userID: String) -> Bool {
-      // ...
-    }
-  
-  }
-  
-  let urlValidator = URLValidator()
-  let isProfile = urlValidator.isProfileUrl(urlToTest, userID: idOfUser)
-  ```
+	```swift
+	class URLValidator {
+	  
+		func isValidURL(_ url: URL) -> Bool {
+			// ...
+		}
+		  
+		func isProfileURL(_ url: URL, for userID: String) -> Bool {
+			// ...
+		}
+	  
+	}
+	  
+	let urlValidator = URLValidator()
+	let isProfile = urlValidator.isProfileUrl(urlToTest, userID: idOfUser)
+	```
   
   
 
@@ -194,23 +194,23 @@ class URLValidator {
 
   
 
-  *Not preferred:*
+	*Not preferred:*
 
-  ```swift
-  let rightTitleMargin: CGFloat
-  let leftTitleMargin: CGFloat
-  let bodyRightMargin: CGFloat
-  let bodyLeftMargin: CGFloat
-  ```
+	```swift
+	let rightTitleMargin: CGFloat
+	let leftTitleMargin: CGFloat
+	let bodyRightMargin: CGFloat
+	let bodyLeftMargin: CGFloat
+	```
 
-  *Preferred:*
+	*Preferred:*
 
-  ```swift
-  let titleMarginRight: CGFloat
-  let titleMarginLeft: CGFloat
-  let bodyMarginRight: CGFloat
-  let bodyMarginLeft: CGFloat
-  ```
+	```swift
+	let titleMarginRight: CGFloat
+	let titleMarginLeft: CGFloat
+	let bodyMarginRight: CGFloat
+	let bodyMarginLeft: CGFloat
+	```
 
   
 
@@ -218,19 +218,19 @@ class URLValidator {
 
   
 
-  Not preferred:*
+	*Not preferred:*
 
-  ```swift
-  let title: String
-  let cancel: UIButton
-  ```
+	```swift
+	let title: String
+	let cancel: UIButton
+	```
 
-  *Preferred:*
+	*Preferred:*
 
-  ```swift
-  let titleText: String
-  let cancelButton: UIButton
-  ```
+	```swift
+	let titleText: String
+	let cancelButton: UIButton
+	```
 
   
 
@@ -238,36 +238,37 @@ class URLValidator {
 
   
 
-  Not preferred:*
+	*Not preferred:*
 
-  ```swift
-  class ExperiencesViewController {
-  
-    private func handleBookButtonTap() {
-      // ...
-    }
-  
-    private func modelChanged() {
-      // ...
-    }
-    
-  }
-  ```
+	```swift
+	class ExperiencesViewController {
+	  
+		private func handleBookButtonTap() {
+  			// ...
+		}
+		  
+		private func modelChanged() {
+  			// ...
+		}
+	    
+	}
+	```
 
-  *Preferred:*
-  ```swift
-  class ExperiencesViewController {
-  
-    private func didTapBookButton() {
-      // ...
-    }
-  
-    private func modelDidChange() {
-      // ...
-    }
-    
-  }
-  ```
+	*Preferred:*
+	
+	```swift
+	class ExperiencesViewController {
+	  
+		private func didTapBookButton() {
+  			// ...
+		}
+		  
+		private func modelDidChange() {
+  			// ...
+		}
+	    
+	}
+	```
 
   
 
@@ -275,21 +276,21 @@ class URLValidator {
 
   
 
-  *Not preferred:*
+	*Not preferred:*
 
-  ```swift
-  class AIRAccount {
-    // ...
-  }
-  ```
+	```swift
+	class AIRAccount {
+		// ...
+	}
+	```
 
-  *Preferred:*
-
-  ```swift
-  class Account {
-    // ...
-  }
-  ```
+	*Preferred:*
+	
+	```swift
+	class Account {
+		// ...
+	}
+	```
 
   
 
@@ -307,46 +308,44 @@ class URLValidator {
 * **Don't include types where they can be easily inferred.**
 
   
-
-  *Not preferred:*
-
-  ```swift
-  let host: Host = Host()
-  ```
-
-  *Preferred:*
-
-  ```swift
-  let host = Host()
-  ```
+	*Not preferred:*
+	
+	```swift
+	let host: Host = Host()
+	```
+	
+	*Preferred:*
+	
+	```swift
+	let host = Host()
+	```
 
   
+	*Not preferred:*
+	
+	```swift
+	enum Direction {
+		case left
+		case right
+	}
+	  
+	func someDirection() -> Direction {
+		return Direction.left
+	}
+	```
 
-  *Not preferred:*
-
-  ```swift
-  enum Direction {
-    case left
-    case right
-  }
-  
-  func someDirection() -> Direction {
-    return Direction.left
-  }
-  ```
-
-  *Preferred:*
-
-  ```swift
-  enum Direction {
-    case left
-    case right
-  }
-  
-  func someDirection() -> Direction {
-    return .left
-  }
-  ```
+	*Preferred:*
+	
+	```swift
+	enum Direction {
+		case left
+		case right
+	}
+	  
+	func someDirection() -> Direction {
+		return .left
+	}
+	```
 
   
 
@@ -354,47 +353,47 @@ class URLValidator {
 
   
 
-  Not preferred:*
-
-  ```swift
-  final class Listing {
-  
-    init(capacity: Int, allowsPets: Bool) {
-      self.capacity = capacity
-      self.isFamilyFriendly = !allowsPets // `self.` not required here
-    }
-  
-    private let isFamilyFriendly: Bool
-    private var capacity: Int
-  
-    private func increaseCapacity(by amount: Int) {
-      self.capacity += amount
-      self.save()
-    }
+	*Not preferred:*
+	
+	```swift
+	final class Listing {
+	  
+		init(capacity: Int, allowsPets: Bool) {
+			self.capacity = capacity
+			self.isFamilyFriendly = !allowsPets // `self.` not required here
+		}
+		  
+		private let isFamilyFriendly: Bool
+		private var capacity: Int
+		  
+		private func increaseCapacity(by amount: Int) {
+			self.capacity += amount
+			self.save()
+		}
     
-  }
-  ```
+	}
+	```
 
-  *Preferred:*
-
-  ```swift
-  final class Listing {
-  
-    init(capacity: Int, allowsPets: Bool) {
-      self.capacity = capacity
-      isFamilyFriendly = !allowsPets
-    }
-  
-    private let isFamilyFriendly: Bool
-    private var capacity: Int
-  
-    private func increaseCapacity(by amount: Int) {
-      capacity += amount
-      save()
-    }
+	*Preferred:*
+	
+	```swift
+	final class Listing {
+	  
+		init(capacity: Int, allowsPets: Bool) {
+			self.capacity = capacity
+			isFamilyFriendly = !allowsPets
+		}
+		  
+		private let isFamilyFriendly: Bool
+		private var capacity: Int
+		  
+		private func increaseCapacity(by amount: Int) {
+			capacity += amount
+			save()
+		}
     
-  }
-  ```
+	}
+	```
 
   
 
@@ -402,37 +401,37 @@ class URLValidator {
 
   
 
-  Not preferred:*
+	*Not preferred:*
+	
+	```swift
+	class MyClass {
+	  
+		func request(completion: () -> Void) {
+			API.request() { [weak self] response in
+				guard let strongSelf = self else { return }
+				// Do work
+				completion()
+			}
+		}
+	    
+	}
+	```
 
-  ```swift
-  class MyClass {
-  
-    func request(completion: () -> Void) {
-      API.request() { [weak self] response in
-        guard let strongSelf = self else { return }
-        // Do work
-        completion()
-      }
-    }
-    
-  }
-  ```
-
-  *Preferred:*
-
-  ```swift
-  class MyClass {
-  
-    func request(completion: () -> Void) {
-      API.request() { [weak self] response in
-        guard let self = self else { return }
-        // Do work
-        completion()
-      }
-    }
-    
-  }
-  ```
+	*Preferred:*
+	
+	```swift
+	class MyClass {
+	  
+		func request(completion: () -> Void) {
+			API.request() { [weak self] response in
+				guard let self = self else { return }
+				// Do work
+				completion()
+			}
+		}
+	    
+	}
+	```
 
   
 
@@ -440,25 +439,25 @@ class URLValidator {
 
   
 
-  Not preferred:*
+	*Not preferred:*
+	
+	```swift
+	let rowContent = [
+		listingUrgencyDatesRowContent(),
+		listingUrgencyBookedRowContent(),
+		listingUrgencyBookedShortRowContent()
+	]
+	```
 
-  ```swift
-  let rowContent = [
-    listingUrgencyDatesRowContent(),
-    listingUrgencyBookedRowContent(),
-    listingUrgencyBookedShortRowContent()
-  ]
-  ```
-
-  *Preferred:*
-
-  ```swift
-  let rowContent = [
-    listingUrgencyDatesRowContent(),
-    listingUrgencyBookedRowContent(),
-    listingUrgencyBookedShortRowContent(),
-  ]
-  ```
+	*Preferred:*
+	
+	```swift
+	let rowContent = [
+		listingUrgencyDatesRowContent(),
+		listingUrgencyBookedRowContent(),
+		listingUrgencyBookedShortRowContent(),
+	]
+	```
 
   
 
@@ -466,34 +465,35 @@ class URLValidator {
 
   
 
-  *Not preferred:*
+	*Not preferred:*
+	
+	```swift
+	func whatever() -> (Int, Int) {
+		return (4, 4)
+	}
+	
+	let thing = whatever()
+	print(thing.0)
+	```
 
-  ```swift
-  func whatever() -> (Int, Int) {
-    return (4, 4)
-  }
-  let thing = whatever()
-  print(thing.0)
-  ```
-
-  *Preferred:*
-
-  ```swift
-  func whatever() -> (x: Int, y: Int) {
-    return (x: 4, y: 4)
-  }
-  
-  // THIS IS ALSO OKAY
-  func whatever2() -> (x: Int, y: Int) {
-    let x = 4
-    let y = 4
-    return (x, y)
-  }
-  
-  let coord = whatever()
-  coord.x
-  coord.y
-  ```
+	*Preferred:*
+	
+	```swift
+	func whatever() -> (x: Int, y: Int) {
+		return (x: 4, y: 4)
+	}
+	  
+	// THIS IS ALSO OKAY
+	func whatever2() -> (x: Int, y: Int) {
+		let x = 4
+		let y = 4
+		return (x, y)
+	}
+	  
+	let coord = whatever()
+	coord.x
+	coord.y
+	```
 
   
 
@@ -501,50 +501,49 @@ class URLValidator {
 
   
 
-  Not preferred:*
+	*Not preferred:*
+	
+	```swift
+	var something : Double = 0
+	```
+	
+	*Preferred:*
+	
+	```swift
+	var something: Double = 0
+	```
+	
+	  
+	
+	*Not preferred:*
+	
+	```swift
+	class MyClass : SuperClass {
+		// ...
+	}
+	```
+	
+	*Preferred:*
+	
+	```swift
+	class MyClass: SuperClass {
+		// ...
+	}
+	```
 
-  ```swift
-  var something : Double = 0
-  ```
 
-  *Preferred:*
-
-  ```swift
-  var something: Double = 0
-  ```
-
-  
-
-  *Not preferred:*
-
-  ```swift
-  class MyClass : SuperClass {
-    // ...
-  }
-  ```
-
-  *Preferred:*
-
-  ```swift
-  class MyClass: SuperClass {
-    // ...
-  }
-  ```
-
-  
-
-  *Not preferred:*
-
-  ```swift
-  var dict = [KeyType:ValueType]()
-  var dict = [KeyType : ValueType]()
-  ```
-
-  *Preferred:*
-
-  ```swift
-  var dict = [KeyType: ValueType]()
-  ```
+	*Not preferred:*
+	
+	```swift
+	var dict = [KeyType:ValueType]()
+	var dict = [KeyType : ValueType]()
+	```
+	
+	*Preferred:*
+	
+	```swift
+	var dict = [KeyType: ValueType]()
+	```
 
   
 
@@ -552,39 +551,39 @@ class URLValidator {
 
   
 
-  *Not preferred:*
-
-  ```swift
-  func doSomething()->String {
-    // ...
-  }
-  ```
-
-  *Preferred:*
-
-  ```swift
-  func doSomething() -> String {
-    // ...
-  }
-  ```
-
-  
-
-  *Not preferred:*
-
-  ```swift
-  func doSomething(completion: ()->Void) {
-    // ...
-  }
-  ```
-
-  *Preferred:*
-
-  ```swift
-  func doSomething(completion: () -> Void) {
-    // ...
-  }
-  ```
+	*Not preferred:*
+		
+	```swift
+	func doSomething()->String {
+		// ...
+	}
+	```
+		
+	*Preferred:*
+		
+	```swift
+	func doSomething() -> String {
+		// ...
+	}
+	```
+		
+	  
+		
+	*Not preferred:*
+		
+	```swift
+	func doSomething(completion: ()->Void) {
+		// ...
+	}
+	```
+		
+	*Preferred:*
+		
+	```swift
+	func doSomething(completion: () -> Void) {
+		// ...
+	}
+	```
 
   
 
@@ -592,23 +591,23 @@ class URLValidator {
 
   
 
-  *Not preferred:*
-
-  ```swift
-  if (userCount > 0) { ... }
-  switch (someValue) { ... }
-  let evens = userCounts.filter { (number) in number % 2 == 0 }
-  let squares = userCounts.map() { $0 * $0 }
-  ```
-
-  *Preferred:*
-
-  ```swift
-  if userCount > 0 { ... }
-  switch someValue { ... }
-  let evens = userCounts.filter { number in number % 2 == 0 }
-  let squares = userCounts.map { $0 * $0 }
-  ```
+	*Not preferred:*
+	
+	```swift
+	if (userCount > 0) { ... }
+	switch (someValue) { ... }
+	let evens = userCounts.filter { (number) in number % 2 == 0 }
+	let squares = userCounts.map() { $0 * $0 }
+	```
+	
+	*Preferred:*
+	
+	```swift
+	if userCount > 0 { ... }
+	switch someValue { ... }
+	let evens = userCounts.filter { number in number % 2 == 0 }
+	let squares = userCounts.map { $0 * $0 }
+	```
 
   
 
@@ -616,27 +615,27 @@ class URLValidator {
 
   
 
-  *Not preferred:*
-
-  ```swift
-  if case .done(_) = result { ... }
-  
-  switch animal {
-  case .dog(_, _, _):
-    ...
-  }
-  ```
-
-  *Preferred:*
-
-  ```swift
-  if case .done = result { ... }
-  
-  switch animal {
-  case .dog:
-    ...
-  }
-  ```
+	*Not preferred:*
+	
+	```swift
+	if case .done(_) = result { ... }
+	  
+	switch animal {
+	case .dog(_, _, _):
+	...
+	}
+	```
+	
+	*Preferred:*
+	
+	```swift
+	if case .done = result { ... }
+	  
+	switch animal {
+	case .dog:
+	...
+	}
+	```
 
   
 
@@ -644,17 +643,17 @@ class URLValidator {
 
   
 	
-  *Not preferred:*
-  
+	*Not preferred:*
+	  
 	```swift
 	let range = NSMakeRange(10, 5)
 	```
-	
-  *Preferred:*
-	
-  ```swift
-  let range = NSRange(location: 10, length: 5)
-  ```
+		
+	*Preferred:*
+		
+	```swift
+	let range = NSRange(location: 10, length: 5)
+	```
   
   
 
@@ -666,22 +665,21 @@ class URLValidator {
 
   
 	
-  *Not preferred:*
-  
-  ```swift
-  func doSomething() -> Void {
-	  ...
+	*Not preferred:*
+	  
+	```swift
+	func doSomething() -> Void {
+		...
 	}
 	```
-	
-  *Preferred:*
-	
-  ```swift
-  func doSomething() {
-    ...
+		
+	*Preferred:*
+		
+	```swift
+	func doSomething() {
+		...
 	}
 	```
-```
   
   
 
@@ -693,21 +691,21 @@ class URLValidator {
 
   
 
-  *Not preferred:*
-
-  ```swift
-  func method(completion: () -> ()) {
-    ...
-  }
-```
-
-  *Preferred:*
-
-  ```swift
-  func method(completion: () -> Void) {
-    ...
-  }
-  ```
+	*Not preferred:*
+	
+	```swift
+	func method(completion: () -> ()) {
+		...
+	}
+	```
+	
+	*Preferred:*
+	
+	```swift
+	func method(completion: () -> Void) {
+		...
+	}
+	```
 
   
 
@@ -718,21 +716,21 @@ class URLValidator {
 
     
 
-    *Not preferred:*
-
-    ```swift
-    someAsyncThing() { argument1, argument2, argument3 in
-    	print(argument3)
-    }
-    ```
-
-    *Preferred:*
-
-    ```swift
-    someAsyncThing() { _, _, argument3 in
-    	print(argument3)
-    }
-    ```
+	*Not preferred:*
+	
+	```swift
+	someAsyncThing() { argument1, argument2, argument3 in
+		print(argument3)
+	}
+	```
+	
+	*Preferred:*
+	
+	```swift
+	someAsyncThing() { _, _, argument3 in
+		print(argument3)
+	}
+	```
 
     
 
@@ -740,17 +738,17 @@ class URLValidator {
 
   
 	
-  *Not preferred:*
-	
+	*Not preferred:*
+		
 	```swift
 	let evenSquares = numbers.filter {$0 % 2 == 0}.map {  $0 * $0  }
 	```
-	
-  *Preferred:*
-	
-  ```swift
-  let evenSquares = numbers.filter { $0 % 2 == 0 }.map { $0 * $0 }
-  ```
+		
+	*Preferred:*
+		
+	```swift
+	let evenSquares = numbers.filter { $0 % 2 == 0 }.map { $0 * $0 }
+	```
   
   
 
@@ -762,26 +760,25 @@ class URLValidator {
 
   
 	
-  *Not preferred:*
-	
-  ```swift
-  let capacity = 1+2
-  let capacity = currentCapacity   ?? 0
-  let mask = (UIAccessibilityTraitButton|UIAccessibilityTraitSelected)
+	*Not preferred:*
+		
+	```swift
+	let capacity = 1+2
+	let capacity = currentCapacity   ?? 0
+	let mask = (UIAccessibilityTraitButton|UIAccessibilityTraitSelected)
 	let capacity=newCapacity
 	let latitude = region.center.latitude - region.span.latitudeDelta/2.0
 	```
-	
-  *Preferred:*
-	
-  ```swift
-  let capacity = 1 + 2
-  let capacity = currentCapacity ?? 0
-  let mask = (UIAccessibilityTraitButton | UIAccessibilityTraitSelected)
-  let capacity = newCapacity
+		
+	*Preferred:*
+		
+	```swift
+	let capacity = 1 + 2
+	let capacity = currentCapacity ?? 0
+	let mask = (UIAccessibilityTraitButton | UIAccessibilityTraitSelected)
+	let capacity = newCapacity
 	let latitude = region.center.latitude - (region.span.latitudeDelta / 2.0)
 	```
-```
   
   
 
@@ -798,28 +795,29 @@ class URLValidator {
 	
 	
 	*Not preferred:*
-  
-​```swift
-  class MyClass: UIViewController {
-  
-  // MARK: Properties
-    var someValue: Int = 0
-  
-  }
-```
-
+	  
+	```swift
+	class MyClass: UIViewController {
+	  
+		// MARK: Properties
+		var someValue: Int = 0
+	  
+	}
+	```
+	
 	*Preferred:*
-
-```swift
-  class MyClass: UIViewController {
-  
-    //==================================================
-    // MARK: Properties
-  //==================================================
-    var someValue: Int = 0
-  
-  }
-```
+	  
+	```swift
+	class MyClass: UIViewController {
+	  
+		//==================================================
+		// MARK: Properties
+		//==================================================
+		
+		var someValue: Int = 0
+	  
+	}
+	```
 
 
 
@@ -827,56 +825,56 @@ class URLValidator {
 
 	
 	
-  *Not preferred:*
-  
-```swift
-  class MyClass: NSObject {
-  
-  // MARK: Helpers
-    func someTask() {
-
-    }
-  
-    // MARK: Initialization
-    init() {
-    super.init()
-    }
-  
-  // MARK: Properties
-    var someValue: Int = 0
-  
-}
-```
-
+	*Not preferred:*
+	  
+	```swift
+	class MyClass: NSObject {
+	  
+		// MARK: Helpers
+		func someTask() {
+		
+		}
+		  
+		// MARK: Initialization
+		init() {
+			super.init()
+		}
+		  
+		// MARK: Properties
+		var someValue: Int = 0
+	  
+	}
+	```
+	
 	*Preferred:*
-
-```swift
-  class MyClass: NSObject {
-  
-    //==================================================
-  // MARK: Properties
-    //==================================================
-
-    var someValue: Int = 0
-  
-    //==================================================
-  // MARK: Initialization
-    //==================================================
-  
-    init() {
-    super.init()
-    }
-  
-    //==================================================
-  // MARK: Helpers
-    //==================================================
-
-    func someTask() {
-
-    }
-  
-  }
-```
+	  
+	```swift
+	class MyClass: NSObject {
+	  
+		//==================================================
+		// MARK: Properties
+		//==================================================
+		
+		var someValue: Int = 0
+		  
+		//==================================================
+		// MARK: Initialization
+		//==================================================
+		  
+		init() {
+			super.init()
+		}
+		  
+		//==================================================
+		// MARK: Helpers
+		//==================================================
+		
+		func someTask() {
+		
+		}
+	  
+	}
+	```
 
 
 
@@ -884,45 +882,45 @@ class URLValidator {
 
 	
   
-  *Not preferred:*
-  
-  ```swift
-  // Wrong
-  class MyClass: NSObject {
-    //==================================================
-    // MARK: Properties
-    //==================================================
-    var someValue: Int = 0
-    //==================================================
-  // MARK: Helpers
-    //==================================================
-    func someTask() {
-  
-  }
+	*Not preferred:*
+	  
+	```swift
+	// Wrong
+	class MyClass: NSObject {
+		//==================================================
+		// MARK: Properties
+		//==================================================
+		var someValue: Int = 0
+		//==================================================
+		// MARK: Helpers
+		//==================================================
+		func someTask() {
+		  
+		}
 	}
 	```
+		
+	*Preferred:*
 	
-  *Preferred:*
-
-  ```swift
-  class MyClass: NSObject {
-  
-  //==================================================
-    // MARK: Properties
-  //==================================================
-  
-    var someValue: Int = 0
-  
-  //==================================================
-    // MARK: Helpers
-  //==================================================
-  
-  func someTask() {
-  
-    }
-  
-  }
-  ```
+	```swift
+	class MyClass: NSObject {
+	  
+		//==================================================
+		// MARK: Properties
+		//==================================================
+		  
+		var someValue: Int = 0
+		  
+		//==================================================
+		// MARK: Helpers
+		//==================================================
+		  
+		func someTask() {
+	  
+		}
+	  
+	}
+	```
 
 
 
@@ -936,35 +934,35 @@ class URLValidator {
 
   
 
-  *Not preferred:*
-
-  ```swift
-  class MyClass: NSObject {
-  
-    init() {
-      super.init()
-      someValue = 5
-    }
-  
-    var someValue: Int!
-    
-  }
-  ```
-
-  *Preferred:*
-
-  ```swift
-  class MyClass: NSObject {
-  
-    init() {
-      someValue = 0
-      super.init()
-    }
-  
-    var someValue: Int
-    
-  }
-  ```
+	*Not preferred:*
+	
+	```swift
+	class MyClass: NSObject {
+	  
+		init() {
+			super.init()
+			someValue = 5
+		}
+		  
+		var someValue: Int!
+		    
+	}
+	```
+	
+	*Preferred:*
+	
+	```swift
+	class MyClass: NSObject {
+	  
+		init() {
+			someValue = 0
+			super.init()
+		}
+		  
+		var someValue: Int
+	    
+	}
+	```
 
   
 
@@ -976,43 +974,43 @@ class URLValidator {
 
   
 
-  *Not preferred:*
-
-  ```swift
-  class TextField {
-    
-    var text: String? {
-      didSet {
-        guard oldValue != text else {
-          return
-        }
-  
-        // Do a bunch of text-related side-effects.
-      }
-    }
-    
-  }
-  ```
-
-  *Preferred:*
-
-  ```swift
-  class TextField {
-    
-    var text: String? {
-      didSet { textDidUpdate(from: oldValue) }
-    }
-  
-    private func textDidUpdate(from oldValue: String?) {
-      guard oldValue != text else {
-        return
-      }
-  
-      // Do a bunch of text-related side-effects.
-    }
-    
-  }
-  ```
+	*Not preferred:*
+	
+	```swift
+	class TextField {
+	    
+		var text: String? {
+			didSet {
+				guard oldValue != text else {
+					return
+				}
+				  
+				// Do a bunch of text-related side-effects.
+			}
+		}
+	    
+	}
+	```
+	
+	*Preferred:*
+		
+	```swift
+	class TextField {
+	    
+		var text: String? {
+			didSet { textDidUpdate(from: oldValue) }
+		}
+			  
+		private func textDidUpdate(from oldValue: String?) {
+			guard oldValue != text else {
+				return
+			}
+		  
+			// Do a bunch of text-related side-effects.
+		}
+	    
+	}
+	```
 
   
 
@@ -1020,42 +1018,42 @@ class URLValidator {
 
   
 
-  *Not preferred:*
+	*Not preferred:*
+	
+	```swift
+	class MyClass {
+	  
+		func request(completion: () -> Void) {
+			API.request() { [weak self] response in
+				if let self = self {
+					// Processing and side effects
+				}
+				completion()
+			}
+		}
+	    
+	}
+	```
 
-  ```swift
-  class MyClass {
-  
-    func request(completion: () -> Void) {
-      API.request() { [weak self] response in
-        if let self = self {
-          // Processing and side effects
-        }
-        completion()
-      }
-    }
-    
-  }
-  ```
-
-  *Preferred:*
-
-  ```swift
-  class MyClass {
-  
-    func request(completion: () -> Void) {
-      API.request() { [weak self] response in
-        guard let self = self else { return }
-        self.doSomething(self.property)
-        completion()
-      }
-    }
-  
-    func doSomething(nonOptionalParameter: SomeClass) {
-      // Processing and side effects
-    }
-    
-  }
-  ```
+	*Preferred:*
+	
+	```swift
+	class MyClass {
+	  
+		func request(completion: () -> Void) {
+			API.request() { [weak self] response in
+				guard let self = self else { return }
+				self.doSomething(self.property)
+				completion()
+			}
+		}
+		  
+		func doSomething(nonOptionalParameter: SomeClass) {
+			// Processing and side effects
+		}
+	    
+	}
+	```
 
   
 
@@ -1073,34 +1071,34 @@ class URLValidator {
 
   
 
-  Not preferred:*
+	*Not preferred:*
 
-  ```swift
-  func age(of person, bornAt timeInterval) -> Int {
-    // ...
-  }
+	```swift
+	func age(of person, bornAt timeInterval) -> Int {
+		// ...
+	}
   
-  func jump(person: Person) {
-    // ...
-  }
-  ```
+	func jump(person: Person) {
+		// ...
+	}
+	```
 
-  *Preferred:*
+	*Preferred:*
 
-  ```swift
-  class Person {
-    var bornAt: TimeInterval
+	```swift
+	class Person {
+		var bornAt: TimeInterval
   
-    var age: Int {
-      // ...
-    }
+		var age: Int {
+			// ...
+		}
   
-    func jump() {
-      // ...
-    }
+		func jump() {
+			// ...
+		}
     
-  }
-  ```
+	}
+	```
 
   
 
@@ -1108,126 +1106,123 @@ class URLValidator {
 
   
 
-  *Preferred:*
+	*Preferred:*
+	
+	```swift
+	private let privateValue = "secret"
+	  
+	public class MyClass {
+	  
+		public static let publicValue = "something"
+		  
+		func doSomething() {
+			print(privateValue)
+			print(MyClass.publicValue)
+		}
+	    
+	}
+	```
 
-  ```swift
-  private let privateValue = "secret"
   
-  public class MyClass {
+
+* **Use caseless `enum`s for organizing `public` or `internal` constants and functions into namespaces.** Avoid creating non-namespaced global constants and functions. Feel free to nest namespaces where it adds clarity. Caseless `enum`s work well as namespaces because they cannot be instantiated, which matches their intent.
+
   
-    public static let publicValue = "something"
-  
-    func doSomething() {
-      print(privateValue)
-      print(MyClass.publicValue)
-    }
+	*Preferred:*
+	
+	```swift
+	enum Environment {
+	  
+		enum Earth {
+			static let gravity = 9.8
+		}
+		  
+		enum Moon {
+			static let gravity = 1.6
+		}
     
-  }
-  ```
-
-  
-
-* **Use caseless `enum`s for organizing `public` or `internal` constants and functions into namespaces.** Avoid creating non-namespaced global constants and functions. Feel free to nest namespaces where it adds clarity.
-
-  Caseless `enum`s work well as namespaces because they cannot be instantiated, which matches their intent.
-
-  
-
-  *Preferred:*
-
-  ```swift
-  enum Environment {
-  
-    enum Earth {
-      static let gravity = 9.8
-    }
-  
-    enum Moon {
-      static let gravity = 1.6
-    }
-    
-  }
-  ```
+	}
+	```
 
   
 
 * **Use Swift's automatic enum values unless they map to an external source.** Add a comment explaining why explicit values are defined. [![SwiftLint: redundant_string_enum_value](https://img.shields.io/badge/SwiftLint-redundant__string__enum__value-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#redundant-string-enum-value)
 
-  To minimize user error, improve readability, and write code faster, rely on Swift's automatic enum values. If the value maps to an external source (e.g. it's coming from a network request) or is persisted across binaries, however, define the values explicity, and document what these values are mapping to.
-
-  This ensures that if someone adds a new value in the middle, they won't accidentally break things.
-
-  
-
-  *Not preferred:*
-
-  ```swift
-  enum ErrorType: String {
-    case error = "error"
-    case warning = "warning"
-  }
-  
-  enum UserType: String {
-    case owner
-    case manager
-    case member
-  }
-  
-  enum Planet: Int {
-    case mercury = 0
-    case venus = 1
-    case earth = 2
-    case mars = 3
-    case jupiter = 4
-    case saturn = 5
-    case uranus = 6
-    case neptune = 7
-  }
-  
-  enum ErrorCode: Int {
-    case notEnoughMemory
-    case invalidResource
-    case timeOut
-  }
-  ```
-
-  *Preferred:*
-
-  ```swift
-  enum ErrorType: String {
-    case error
-    case warning
-  }
-  
-  /// These are written to a logging service. Explicit values ensure they're consistent across binaries.
-  // swiftlint:disable redundant_string_enum_value
-  enum UserType: String {
-    case owner = "owner"
-    case manager = "manager"
-    case member = "member"
-  }
-  // swiftlint:enable redundant_string_enum_value
-  
-  enum Planet: Int {
-    case mercury
-    case venus
-    case earth
-    case mars
-    case jupiter
-    case saturn
-    case uranus
-    case neptune
-  }
-  
-  /// These values come from the server, so we set them here explicitly to match those values.
-  enum ErrorCode: Int {
-    case notEnoughMemory = 0
-    case invalidResource = 1
-    case timeOut = 2
-  }
-  ```
+	To minimize user error, improve readability, and write code faster, rely on Swift's automatic enum values. If the value maps to an external source (e.g. it's coming from a network request) or is persisted across binaries, however, define the values explicity, and document what these values are mapping to.
+	
+	This ensures that if someone adds a new value in the middle, they won't accidentally break things.
 
   
+
+	*Not preferred:*
+	
+	```swift
+	enum ErrorType: String {
+		case error = "error"
+		case warning = "warning"
+	}
+	  
+	enum UserType: String {
+		case owner
+		case manager
+		case member
+	}
+	  
+	enum Planet: Int {
+		case mercury = 0
+		case venus = 1
+		case earth = 2
+		case mars = 3
+		case jupiter = 4
+		case saturn = 5
+		case uranus = 6
+		case neptune = 7
+	}
+	  
+	enum ErrorCode: Int {
+		case notEnoughMemory
+		case invalidResource
+		case timeOut
+	}
+	```
+
+	*Preferred:*
+
+	```swift
+	enum ErrorType: String {
+		case error
+		case warning
+	}
+	  
+	/// These are written to a logging service. Explicit values ensure they're consistent across binaries.
+	
+	// swiftlint:disable redundant_string_enum_value
+	enum UserType: String {
+		case owner = "owner"
+		case manager = "manager"
+		case member = "member"
+	}
+	
+	// swiftlint:enable redundant_string_enum_value  
+	enum Planet: Int {
+		case mercury
+		case venus
+		case earth
+		case mars
+		case jupiter
+		case saturn
+		case uranus
+		case neptune
+	}
+	  
+	/// These values come from the server, so we set them here explicitly to match those values.
+	enum ErrorCode: Int {
+		case notEnoughMemory = 0
+		case invalidResource = 1
+		case timeOut = 2
+	}
+	```
+
 
 * **Use optionals only when they have semantic meaning.**
 
@@ -1235,44 +1230,44 @@ class URLValidator {
 
 * **Prefer immutable values whenever possible.** Use `map` and `compactMap` instead of appending to a new collection. Use `filter` instead of removing elements from a mutable collection.
 
-  Mutable variables increase complexity, so try to keep them in as narrow a scope as possible.
+	Mutable variables increase complexity, so try to keep them in as narrow a scope as possible.
 
   
 
-  *Not preferred:*
+	*Not preferred:*
 
-  ```swift
-  var results = [SomeType]()
-  for element in input {
-    let result = transform(element)
-    results.append(result)
-  }
-  ```
+	```swift
+	var results = [SomeType]()
+	for element in input {
+		let result = transform(element)
+		results.append(result)
+	}
+	```
 
-  *Preferred:*
+	*Preferred:*
 
-  ```swift
-  let results = input.map { transform($0) }
-  ```
+	```swift
+	let results = input.map { transform($0) }
+	```
 
   
 
-  *Not preferred:*
+	*Not preferred:*
 
-  ```swift
-  var results = [SomeType]()
-  for element in input {
-    if let result = transformThatReturnsAnOptional(element) {
-      results.append(result)
-    }
-  }
-  ```
+	```swift
+	var results = [SomeType]()
+	for element in input {
+		if let result = transformThatReturnsAnOptional(element) {
+			results.append(result)
+		}
+	}
+	```
 
-  *Preferred:*
+	*Preferred:*
 
-  ```swift
-  let results = input.compactMap { transformThatReturnsAnOptional($0) }
-  ```
+	```swift
+	let results = input.compactMap { transformThatReturnsAnOptional($0) }
+	```
 
   
 
@@ -1312,112 +1307,108 @@ class URLValidator {
 
 * **Default type methods to `static`.**
 
-  If a method needs to be overridden, the author should opt into that functionality by using the `class` keyword instead.
+	If a method needs to be overridden, the author should opt into that functionality by using the `class` keyword instead.
 
   
+	*Not preferred:*
 
-  *Not preferred:*
+	```swift
+	class Fruit {
+		class func eatFruits(_ fruits: [Fruit]) { ... }
+	}
+	```
 
-  ```swift
-  class Fruit {
-    class func eatFruits(_ fruits: [Fruit]) { ... }
-  }
-  ```
+	*Preferred:*
 
-  *Preferred:*
-
-  ```swift
-  class Fruit {
-    static func eatFruits(_ fruits: [Fruit]) { ... }
-  }
-  ```
+	```swift
+	class Fruit {
+		static func eatFruits(_ fruits: [Fruit]) { ... }
+	}
+	```
 
   
 
 * **Default classes to `final`.**
 
-  If a class needs to be overridden, the author should opt into that functionality by omitting the `final` keyword.
+	If a class needs to be overridden, the author should opt into that functionality by omitting the `final` keyword.
 
   
 
-  *Not preferred:*
+	*Not preferred:*
 
-  ```swift
-  class SettingsRepository {
-    // ...
-  }
-  ```
+	```swift
+	class SettingsRepository {
+		// ...
+	}
+	```
 
-  *Preferred:*
-
-  ```swift
-  final class SettingsRepository {
-    // ...
-  }
-  ```
+	*Preferred:*
+	
+	```swift
+	final class SettingsRepository {
+		// ...
+	}
+	```
 
   
 
 * **Never use the `default` case when `switch`ing over an enum.**
 
-  Enumerating every case requires developers and reviewers have to consider the correctness of every switch statement when new cases are added.
+	Enumerating every case requires developers and reviewers have to consider the correctness of every switch statement when new cases are added.
 
   
 
-  *Not preferred:*
+	*Not preferred:*
+	
+	```swift
+	switch anEnum {
+	case .a:
+		// Do something
+	default:
+		// Do something else.
+	}
+	```
 
-  ```swift
-  switch anEnum {
-  case .a:
-    // Do something
-  default:
-    // Do something else.
-  }
-  ```
-
-  *Preferred:*
-
-  ```swift
-  switch anEnum {
-  case .a:
-    // Do something
-  case .b, .c:
-    // Do something else.
-  }
-  ```
+	*Preferred:*
+	
+	```swift
+	switch anEnum {
+	case .a:
+		// Do something
+	case .b, .c:
+		// Do something else.
+	}
+	```
 
   
 
 * **Check for nil rather than using optional binding if you don't need to use the value.** [![SwiftLint: unused_optional_binding](https://img.shields.io/badge/SwiftLint-unused_optional_binding-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#unused-optional-binding)
 
-  
-
-  
-  #### Why?
-Checking for nil makes it immediately clear what the intent of the statement is. Optional binding is less explicit.
+	#### Why?
+	Checking for nil makes it immediately clear what the intent of the statement is. Optional binding is less explicit.
 
 	
 	
-  *Not preferred:*
+	*Not preferred:*
   
-```swift
+	```swift
 	var thing: Thing?
-	
-  if let _ = thing {
-  	doThing()
-  }
-```
-
-  *Preferred:*
-	
-```swift
-  var thing: Thing?
+		
+	if let _ = thing {
+		doThing()
+	}
+	```
   
-  if thing != nil {
-    doThing()
-  }
-```
-
+	*Preferred:*
+	
+	```swift
+	var thing: Thing?
+  
+	if thing != nil {
+		doThing()
+	}
+	```
+  
   
 
 **[⬆ back to top](#table-of-contents)**
@@ -1428,67 +1419,62 @@ Checking for nil makes it immediately clear what the intent of the statement is.
 
 * **Alphabetize module imports at the top of the file a single line below the last line of the header comments. Do not add additional line breaks between import statements.** [![SwiftFormat: sortedImports](https://img.shields.io/badge/SwiftFormat-sortedImports-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#sortedImports)
 
-  
 
+	#### Why?
+	A standard organization method helps engineers more quickly determine which modules a file depends on.
 
-  #### Why?
-  A standard organization method helps engineers more quickly determine which modules a file depends on.
+	*Not preferred:*
 
-  *Not preferred:*
+	```swift
+	//  Copyright © 2020 Checkfer Ltd. All rights reserved.
+	//
+	import DLSPrimitives
+	import Constellation
+	import Epoxy
+	
+	import Foundation
+	```
 
-```swift
-//  Copyright © 2020 Checkfer Ltd. All rights reserved.
-//
-import DLSPrimitives
-import Constellation
-import Epoxy
+	*Preferred:*
 
-import Foundation
-```
+	```swift
+	//  Copyright © 2020 Checkfer Ltd. All rights reserved.
+	//
 
-  *Preferred:*
+	import Constellation
+	import DLSPrimitives
+	import Epoxy
+	import Foundation
+ 	```
 
- ```swift
-//  Copyright © 2020 Checkfer Ltd. All rights reserved.
-//
+	_Exception: `@testable import` should be grouped after the regular import and separated by an empty line._
 
-import Constellation
-import DLSPrimitives
-import Epoxy
-import Foundation
- ```
+	*Not preferred:*
 
-  
+	```swift
+	//  Copyright © 2020 Checkfer Ltd. All rights reserved.
+	//
+	
+	import DLSPrimitives
+	@testable import Epoxy
+	import Foundation
+	import Nimble
+	import Quick
+	```
 
-  _Exception: `@testable import` should be grouped after the regular import and separated by an empty line._
+	*Preferred:*
 
-  *Not preferred:*
-
-```swift
-//  Copyright © 2020 Checkfer Ltd. All rights reserved.
-//
-
-import DLSPrimitives
-@testable import Epoxy
-import Foundation
-import Nimble
-import Quick
-```
-
-  *Preferred:*
-
-```swift
-//  Copyright © 2020 Checkfer Ltd. All rights reserved.
-//
-
-import DLSPrimitives
-import Foundation
-import Nimble
-import Quick
-
-@testable import Epoxy
-```
-
+	```swift
+	//  Copyright © 2020 Checkfer Ltd. All rights reserved.
+	//
+	
+	import DLSPrimitives
+	import Foundation
+	import Nimble
+	import Quick
+	
+	@testable import Epoxy
+	```
 
 
 
@@ -1510,24 +1496,24 @@ import Quick
 	
 	*Preferred:*
   
-  ```swift
-class PriceBreakdownViewController {
-  
-  private let acceptButton = UIButton()
-  
-    private func setUpAcceptButton() {
-      acceptButton.addTarget(
-        self,
-        action: #selector(didTapAcceptButton),
-        forControlEvents: .TouchUpInside)
-  }
-  
-    @objc
-    private func didTapAcceptButton() {
-      // ...
-    }
-  }
-  ```
+	```swift
+	class PriceBreakdownViewController {
+	  
+		private let acceptButton = UIButton()
+		  
+		private func setUpAcceptButton() {
+			acceptButton.addTarget(
+				self,
+				action: #selector(didTapAcceptButton),
+				forControlEvents: .TouchUpInside)
+		}
+		  
+		@objc
+		private func didTapAcceptButton() {
+			// ...
+		}
+	}
+	```
 
 **[⬆ back to top](#table-of-contents)**
 
