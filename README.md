@@ -63,7 +63,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   
 
   ```swift
-protocol SpaceThing {
+	protocol SpaceThing {
   	// ...
   }
   
@@ -91,6 +91,7 @@ protocol SpaceThing {
   
 
 _Exception: You may prefix a private property with an underscore if it is backing an identically-named property or method with a higher access level_
+
 
 
   #### Why?
@@ -123,6 +124,8 @@ public final class AnyRequester<ModelType>: Requester {
 }
   ```
 
+
+
   - Backing a less specific type with a more specific type
 
   ```swift
@@ -137,15 +140,21 @@ final class ExperiencesViewController: UIViewController {
 }
   ```
 
+
+
 * **Name booleans like `isSpaceship`, `hasSpacesuit`, etc.** This makes it clear that they are booleans and not other types.
+
+  
 
 * **Acronyms in names (e.g. `URL`) should be all-caps except when it’s the start of a name that would otherwise be lowerCamelCase, in which case it should be uniformly lower-cased.**
 
-	**Not preferred:**
-	
-	```swift
-  class UrlValidator {
+  
 
+  *Not preferred:*
+
+  ```swift
+  class UrlValidator {
+  
     func isValidUrl(_ URL: URL) -> Bool {
       // ...
     }
@@ -153,48 +162,50 @@ final class ExperiencesViewController: UIViewController {
     func isProfileUrl(_ URL: URL, for userId: String) -> Bool {
       // ...
     }
-
+  
   }
-
+  
   let URLValidator = UrlValidator()
   let isProfile = URLValidator.isProfileUrl(URLToTest, userId: IDOfUser)
   ```
 
-	**Preferred:**
+  *Preferred:*
 
-	```swift
-  class URLValidator {
-
+  ```swift
+class URLValidator {
+  
     func isValidURL(_ url: URL) -> Bool {
       // ...
     }
-
+  
     func isProfileURL(_ url: URL, for userID: String) -> Bool {
       // ...
     }
-
+  
   }
-
+  
   let urlValidator = URLValidator()
   let isProfile = urlValidator.isProfileUrl(urlToTest, userID: idOfUser)
   ```
-
+  
   
 
 * **Names should be written with their most general part first and their most specific part last.** The meaning of "most general" depends on context, but should roughly mean "that which most helps you narrow down your search for the item you're looking for." Most importantly, be consistent with how you order the parts of your name.
 
-	**Not preferred**:
+  
 
-	```swift
+  *Not preferred:*
+
+  ```swift
   let rightTitleMargin: CGFloat
   let leftTitleMargin: CGFloat
   let bodyRightMargin: CGFloat
   let bodyLeftMargin: CGFloat
   ```
 
-	**Preferred:**
+  *Preferred:*
 
-	```swift
+  ```swift
   let titleMarginRight: CGFloat
   let titleMarginLeft: CGFloat
   let bodyMarginRight: CGFloat
@@ -205,16 +216,18 @@ final class ExperiencesViewController: UIViewController {
 
 * **Include a hint about type in a name if it would otherwise be ambiguous.**
 
-	**Not preferred:**
+  
 
-	```swift
+  Not preferred:*
+
+  ```swift
   let title: String
   let cancel: UIButton
   ```
 
-	**Preferred:**
+  *Preferred:*
 
-	```swift
+  ```swift
   let titleText: String
   let cancelButton: UIButton
   ```
@@ -223,7 +236,10 @@ final class ExperiencesViewController: UIViewController {
 
 * **Event-handling functions should be named like past-tense sentences.** The subject can be omitted if it's not needed for clarity.
 
-  **Not preferred:**
+  
+
+  Not preferred:*
+
   ```swift
   class ExperiencesViewController {
   
@@ -237,9 +253,9 @@ final class ExperiencesViewController: UIViewController {
     
   }
   ```
-  
-  **Preferred:**
-	```swift
+
+  *Preferred:*
+  ```swift
   class ExperiencesViewController {
   
     private func didTapBookButton() {
@@ -257,17 +273,19 @@ final class ExperiencesViewController: UIViewController {
 
 * **Avoid Objective-C-style acronym prefixes.** This is no longer needed to avoid naming conflicts in Swift.
 
-	**Not preferred:**
+  
 
-	```swift
+  *Not preferred:*
+
+  ```swift
   class AIRAccount {
     // ...
   }
   ```
-  
-	**Preferred:**
-	
-	```swift
+
+  *Preferred:*
+
+  ```swift
   class Account {
     // ...
   }
@@ -288,21 +306,24 @@ final class ExperiencesViewController: UIViewController {
 
 * **Don't include types where they can be easily inferred.**
 
-	**Not preferred:**
+  
 
-	```swift
+  *Not preferred:*
+
+  ```swift
   let host: Host = Host()
   ```
 
-	**Preferred:**
-  
+  *Preferred:*
+
   ```swift
-  // RIGHT
   let host = Host()
   ```
 
-	**Not preferred:**
-	
+  
+
+  *Not preferred:*
+
   ```swift
   enum Direction {
     case left
@@ -313,9 +334,9 @@ final class ExperiencesViewController: UIViewController {
     return Direction.left
   }
   ```
-  
-	**Preferred:**
-	
+
+  *Preferred:*
+
   ```swift
   enum Direction {
     case left
@@ -331,8 +352,10 @@ final class ExperiencesViewController: UIViewController {
 
 * **Don't use `self` unless it's necessary for disambiguation or required by the language.** [![SwiftFormat: redundantSelf](https://img.shields.io/badge/SwiftFormat-redundantSelf-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantSelf)
 
-	**Not preferred:**
-	
+  
+
+  Not preferred:*
+
   ```swift
   final class Listing {
   
@@ -351,10 +374,10 @@ final class ExperiencesViewController: UIViewController {
     
   }
   ```
-  
-	**Preferred:**
-	
-	```swift
+
+  *Preferred:*
+
+  ```swift
   final class Listing {
   
     init(capacity: Int, allowsPets: Bool) {
@@ -378,7 +401,8 @@ final class ExperiencesViewController: UIViewController {
 * **Bind to `self` when upgrading from a weak reference.** [![SwiftFormat: strongifiedSelf](https://img.shields.io/badge/SwiftFormat-strongifiedSelf-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#strongifiedSelf)
 
   
-	**Not preferred:**
+
+  Not preferred:*
 
   ```swift
   class MyClass {
@@ -394,8 +418,8 @@ final class ExperiencesViewController: UIViewController {
   }
   ```
 
-	**Preferred:**
-  
+  *Preferred:*
+
   ```swift
   class MyClass {
   
@@ -415,7 +439,8 @@ final class ExperiencesViewController: UIViewController {
 * **Add a trailing comma on the last element of a multi-line array.** [![SwiftFormat: trailingCommas](https://img.shields.io/badge/SwiftFormat-trailingCommas-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#trailingCommas)
 
   
-	**Not preferred:**
+
+  Not preferred:*
 
   ```swift
   let rowContent = [
@@ -424,10 +449,10 @@ final class ExperiencesViewController: UIViewController {
     listingUrgencyBookedShortRowContent()
   ]
   ```
-  
-	**Preferred:**
 
-	```swift
+  *Preferred:*
+
+  ```swift
   let rowContent = [
     listingUrgencyDatesRowContent(),
     listingUrgencyBookedRowContent(),
@@ -440,7 +465,8 @@ final class ExperiencesViewController: UIViewController {
 * **Name members of tuples for extra clarity.** Rule of thumb: if you've got more than 3 fields, you should probably be using a struct.
 
   
-	**Not preferred:**
+
+  *Not preferred:*
 
   ```swift
   func whatever() -> (Int, Int) {
@@ -450,9 +476,9 @@ final class ExperiencesViewController: UIViewController {
   print(thing.0)
   ```
 
-	**Preferred:**
-  
-	```swift
+  *Preferred:*
+
+  ```swift
   func whatever() -> (x: Int, y: Int) {
     return (x: 4, y: 4)
   }
@@ -474,44 +500,49 @@ final class ExperiencesViewController: UIViewController {
 * **Place the colon immediately after an identifier, followed by a space.** [![SwiftLint: colon](https://img.shields.io/badge/SwiftLint-colon-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#colon)
 
   
-	**Not preferred:**
+
+  Not preferred:*
 
   ```swift
   var something : Double = 0
   ```
 
-	**Preferred:**
-  
-	```swift
+  *Preferred:*
+
+  ```swift
   var something: Double = 0
   ```
 
-	**Not preferred:**
-	
+  
+
+  *Not preferred:*
+
   ```swift
   class MyClass : SuperClass {
     // ...
   }
   ```
-  
-	**Preferred:**
-  
+
+  *Preferred:*
+
   ```swift
   class MyClass: SuperClass {
     // ...
   }
   ```
 
-	**Not preferred:**
-	
+  
+
+  *Not preferred:*
+
   ```swift
   var dict = [KeyType:ValueType]()
   var dict = [KeyType : ValueType]()
   ```
-  
-	**Preferred:**
-  
-	```swift
+
+  *Preferred:*
+
+  ```swift
   var dict = [KeyType: ValueType]()
   ```
 
@@ -520,33 +551,36 @@ final class ExperiencesViewController: UIViewController {
 * **Place a space on either side of a return arrow for readability.** [![SwiftLint: return_arrow_whitespace](https://img.shields.io/badge/SwiftLint-return__arrow__whitespace-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#returning-whitespace)
 
   
-	**Not preferred:**
+
+  *Not preferred:*
 
   ```swift
   func doSomething()->String {
     // ...
   }
   ```
-  
-	**Preferred:**
-  
-	```swift
+
+  *Preferred:*
+
+  ```swift
   func doSomething() -> String {
     // ...
   }
   ```
 
-	**Not preferred:**
-	
+  
+
+  *Not preferred:*
+
   ```swift
   func doSomething(completion: ()->Void) {
     // ...
   }
   ```
-  
-	**Preferred:**
-  
-	```swift
+
+  *Preferred:*
+
+  ```swift
   func doSomething(completion: () -> Void) {
     // ...
   }
@@ -557,7 +591,8 @@ final class ExperiencesViewController: UIViewController {
 * **Omit unnecessary parentheses.** [![SwiftFormat: redundantParens](https://img.shields.io/badge/SwiftFormat-redundantParens-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantParens)
 
   
-	**Not preferred:**
+
+  *Not preferred:*
 
   ```swift
   if (userCount > 0) { ... }
@@ -565,10 +600,10 @@ final class ExperiencesViewController: UIViewController {
   let evens = userCounts.filter { (number) in number % 2 == 0 }
   let squares = userCounts.map() { $0 * $0 }
   ```
-  
-	**Preferred:**
-  
-	```swift
+
+  *Preferred:*
+
+  ```swift
   if userCount > 0 { ... }
   switch someValue { ... }
   let evens = userCounts.filter { number in number % 2 == 0 }
@@ -580,7 +615,8 @@ final class ExperiencesViewController: UIViewController {
 * **Omit enum associated values from case statements when all arguments are unlabeled.** [![SwiftLint: empty_enum_arguments](https://img.shields.io/badge/SwiftLint-empty__enum__arguments-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#empty-enum-arguments)
 
   
-	**Not preferred:**
+
+  *Not preferred:*
 
   ```swift
   if case .done(_) = result { ... }
@@ -590,10 +626,10 @@ final class ExperiencesViewController: UIViewController {
     ...
   }
   ```
-  
-	**Preferred:**
-  
-	```swift
+
+  *Preferred:*
+
+  ```swift
   if case .done = result { ... }
   
   switch animal {
@@ -607,15 +643,16 @@ final class ExperiencesViewController: UIViewController {
 * **Use constructors instead of Make() functions for NSRange and others.** [![SwiftLint: legacy_constructor](https://img.shields.io/badge/SwiftLint-legacy__constructor-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-constructor)
 
   
-	**Not preferred:**
+	
+  *Not preferred:*
   
-  ```swift
+	```swift
 	let range = NSMakeRange(10, 5)
 	```
 	
-	**Preferred:**
-  
-	```swift
+  *Preferred:*
+	
+  ```swift
   let range = NSRange(location: 10, length: 5)
   ```
   
@@ -628,22 +665,24 @@ final class ExperiencesViewController: UIViewController {
 * **Omit `Void` return types from function definitions.** [![SwiftLint: redundant_void_return](https://img.shields.io/badge/SwiftLint-redundant__void__return-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#redundant-void-return)
 
   
-	**Not preferred:**
+	
+  *Not preferred:*
   
   ```swift
   func doSomething() -> Void {
-    ...
+	  ...
 	}
 	```
 	
-	**Preferred:**
-  
-	```swift
+  *Preferred:*
+	
+  ```swift
   func doSomething() {
     ...
-  }
+	}
 	```
-
+```
+  
   
 
 ## Closures
@@ -653,17 +692,18 @@ final class ExperiencesViewController: UIViewController {
 * **Favor `Void` return types over `()` in closure declarations.** If you must specify a `Void` return type in a function declaration, use `Void` rather than `()` to improve readability. [![SwiftLint: void_return](https://img.shields.io/badge/SwiftLint-void__return-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#void-return)
 
   
-	**Not preferred:**
+
+  *Not preferred:*
 
   ```swift
   func method(completion: () -> ()) {
     ...
   }
-  ```
-  
-	**Preferred:**
-  
-	```swift
+```
+
+  *Preferred:*
+
+  ```swift
   func method(completion: () -> Void) {
     ...
   }
@@ -676,36 +716,39 @@ final class ExperiencesViewController: UIViewController {
     Naming unused closure parameters as underscores reduces the cognitive overhead required to read
     closures by making it obvious which parameters are used and which are unused.
 
-	**Not preferred:**
-	
-	```swift
-	someAsyncThing() { argument1, argument2, argument3 in
-		print(argument3)
-	}
-	```
+    
 
-	**Preferred:**
+    *Not preferred:*
 
-	```swift
-	someAsyncThing() { _, _, argument3 in
-		print(argument3)
-	}
-	```
+    ```swift
+    someAsyncThing() { argument1, argument2, argument3 in
+    	print(argument3)
+    }
+    ```
+
+    *Preferred:*
+
+    ```swift
+    someAsyncThing() { _, _, argument3 in
+    	print(argument3)
+    }
+    ```
 
     
 
 * <a id='closure-brace-spacing'></a>(<a href='#closure-brace-spacing'>link</a>) **Single-line closures should have a space inside each brace.** [![SwiftLint: closure_spacing](https://img.shields.io/badge/SwiftLint-closure__spacing-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#closure-spacing)
 
   
-	**Not preferred:**
-  
+	
+  *Not preferred:*
+	
 	```swift
 	let evenSquares = numbers.filter {$0 % 2 == 0}.map {  $0 * $0  }
 	```
 	
-	**Preferred:**
-  
-	```swift
+  *Preferred:*
+	
+  ```swift
   let evenSquares = numbers.filter { $0 % 2 == 0 }.map { $0 * $0 }
   ```
   
@@ -718,29 +761,33 @@ final class ExperiencesViewController: UIViewController {
 * **Infix operators should have a single space on either side.** Prefer parenthesis to visually group statements with many operators rather than varying widths of whitespace. This rule does not apply to range operators (e.g. `1...3`) and postfix or prefix operators (e.g. `guest?` or `-1`). [![SwiftLint: operator_usage_whitespace](https://img.shields.io/badge/SwiftLint-operator__usage__whitespace-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#operator-usage-whitespace)
 
   
-	**Not preferred:**
-  
-	```swift
+	
+  *Not preferred:*
+	
+  ```swift
   let capacity = 1+2
   let capacity = currentCapacity   ?? 0
   let mask = (UIAccessibilityTraitButton|UIAccessibilityTraitSelected)
-  let capacity=newCapacity
+	let capacity=newCapacity
 	let latitude = region.center.latitude - region.span.latitudeDelta/2.0
 	```
 	
-	**Preferred:**
-  
-	```swift
+  *Preferred:*
+	
+  ```swift
   let capacity = 1 + 2
   let capacity = currentCapacity ?? 0
   let mask = (UIAccessibilityTraitButton | UIAccessibilityTraitSelected)
   let capacity = newCapacity
-  let latitude = region.center.latitude - (region.span.latitudeDelta / 2.0)
+	let latitude = region.center.latitude - (region.span.latitudeDelta / 2.0)
 	```
-
+```
+  
   
 
 **[⬆ back to top](#table-of-contents)**
+
+
 
 ## Formatting/Structure
 
@@ -748,90 +795,97 @@ final class ExperiencesViewController: UIViewController {
 
 * **Marking indicators should be used on all swift class files.** There should always be a distiguishable sections to the code and Markings to clearly identify each section, this should not just be functional marking but visual. 
 
-	**Not preferred:**
 	
-	```swift
-  class MyClass: UIViewController {
-
-    // MARK: Properties
-    var someValue: Int = 0
-
-  }
-  ```
+	
+	*Not preferred:*
   
-	**Preferred:**
-
-	```swift
+​```swift
   class MyClass: UIViewController {
+  
+  // MARK: Properties
+    var someValue: Int = 0
+  
+  }
+```
 
+	*Preferred:*
+
+```swift
+  class MyClass: UIViewController {
+  
     //==================================================
     // MARK: Properties
-    //==================================================
+  //==================================================
     var someValue: Int = 0
-
+  
   }
-  ```
+```
 
 
 
 - **Code structure should be in a standardised order** There should always be a distiguishable flow to the code, this will help create readable code. 
 
-	**Not preferred:**
 	
-  ```swift
+	
+  *Not preferred:*
+  
+```swift
   class MyClass: NSObject {
-
-    // MARK: Helpers
+  
+  // MARK: Helpers
     func someTask() {
 
     }
-
+  
     // MARK: Initialization
     init() {
-      super.init()
+    super.init()
     }
-
-    // MARK: Properties
+  
+  // MARK: Properties
     var someValue: Int = 0
+  
+}
+```
 
-  }
-  ```
+	*Preferred:*
 
-	**Preferred:**
-
-	```swift
+```swift
   class MyClass: NSObject {
-
+  
     //==================================================
-    // MARK: Properties
+  // MARK: Properties
     //==================================================
 
     var someValue: Int = 0
-
+  
     //==================================================
-    // MARK: Initialization
+  // MARK: Initialization
     //==================================================
-
+  
     init() {
-      super.init()
+    super.init()
     }
-
+  
     //==================================================
-    // MARK: Helpers
+  // MARK: Helpers
     //==================================================
 
     func someTask() {
 
     }
-
+  
   }
-  ```
+```
 
 
 
 - **Enforced trailing new lines (code white-space)** There should be a necessary amount of new lines that creates better readability and structure to the code, spacing between markings, functions and helper code. White spacing should be used in single lines only. [![SwiftLint: implicitly_unwrapped_optional](https://img.shields.io/badge/SwiftLint-trailing__newline-007A87.svg)](https://realm.github.io/SwiftLint/trailing_newline.html)
 
-	**Not preferred:**
+	
+  
+  *Not preferred:*
+  
   ```swift
   // Wrong
   class MyClass: NSObject {
@@ -840,33 +894,33 @@ final class ExperiencesViewController: UIViewController {
     //==================================================
     var someValue: Int = 0
     //==================================================
-    // MARK: Helpers
+  // MARK: Helpers
     //==================================================
     func someTask() {
-
-    }
+  
   }
-  ```
-
-	**Preferred:**
+	}
+	```
 	
-	```swift
+  *Preferred:*
+
+  ```swift
   class MyClass: NSObject {
-
-    //==================================================
+  
+  //==================================================
     // MARK: Properties
-    //==================================================
-
+  //==================================================
+  
     var someValue: Int = 0
-
-    //==================================================
+  
+  //==================================================
     // MARK: Helpers
-    //==================================================
-
-    func someTask() {
-
+  //==================================================
+  
+  func someTask() {
+  
     }
-
+  
   }
   ```
 
@@ -881,7 +935,8 @@ final class ExperiencesViewController: UIViewController {
 * **Prefer initializing properties at `init` time whenever possible, rather than using implicitly unwrapped optionals.**  A notable exception is UIViewController's `view` property. [![SwiftLint: implicitly_unwrapped_optional](https://img.shields.io/badge/SwiftLint-implicitly__unwrapped__optional-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#implicitly-unwrapped-optional)
 
   
-	**Not preferred:**
+
+  *Not preferred:*
 
   ```swift
   class MyClass: NSObject {
@@ -895,10 +950,10 @@ final class ExperiencesViewController: UIViewController {
     
   }
   ```
-  
-	**Preferred:**
-  
-	```swift
+
+  *Preferred:*
+
+  ```swift
   class MyClass: NSObject {
   
     init() {
@@ -915,10 +970,13 @@ final class ExperiencesViewController: UIViewController {
 
 * **Avoid performing any meaningful or time-intensive work in `init()`.** Avoid doing things like opening database connections, making network requests, reading large amounts of data from disk, etc. Create something like a `start()` method if these things need to be done before an object is ready for use.
 
+  
+
 * **Extract complex property observers into methods.** This reduces nestedness, separates side-effects from property declarations, and makes the usage of implicitly-passed parameters like `oldValue` explicit.
 
   
-	**Not preferred:**
+
+  *Not preferred:*
 
   ```swift
   class TextField {
@@ -935,10 +993,10 @@ final class ExperiencesViewController: UIViewController {
     
   }
   ```
-  
-	**Preferred:**
-  
-	```swift
+
+  *Preferred:*
+
+  ```swift
   class TextField {
     
     var text: String? {
@@ -961,7 +1019,8 @@ final class ExperiencesViewController: UIViewController {
 * **Extract complex callback blocks into methods**. This limits the complexity introduced by weak-self in blocks and reduces nestedness. If you need to reference self in the method call, make use of `guard` to unwrap self for the duration of the callback.
 
   
-	**Not preferred:**
+
+  *Not preferred:*
 
   ```swift
   class MyClass {
@@ -977,10 +1036,10 @@ final class ExperiencesViewController: UIViewController {
     
   }
   ```
-  
-	**Preferred:**
-  
-	```swift
+
+  *Preferred:*
+
+  ```swift
   class MyClass {
   
     func request(completion: () -> Void) {
@@ -1008,10 +1067,13 @@ final class ExperiencesViewController: UIViewController {
 
 * **Access control should be at the strictest level possible.** Prefer `public` to `open` and `private` to `fileprivate` unless you need that behavior.
 
+  
+
 * **Avoid global functions whenever possible.** Prefer methods within type definitions.
 
   
-	**Not preferred:**
+
+  Not preferred:*
 
   ```swift
   func age(of person, bornAt timeInterval) -> Int {
@@ -1023,8 +1085,8 @@ final class ExperiencesViewController: UIViewController {
   }
   ```
 
-	**Preferred:**
-	
+  *Preferred:*
+
   ```swift
   class Person {
     var bornAt: TimeInterval
@@ -1045,7 +1107,8 @@ final class ExperiencesViewController: UIViewController {
 * **Prefer putting constants in the top level of a file if they are `private`.** If they are `public` or `internal`, define them as static properties, for namespacing purposes.
 
   
-	**Preferred:**
+
+  *Preferred:*
 
   ```swift
   private let privateValue = "secret"
@@ -1068,8 +1131,10 @@ final class ExperiencesViewController: UIViewController {
 
   Caseless `enum`s work well as namespaces because they cannot be instantiated, which matches their intent.
 
-	**Preferred:**
-	
+  
+
+  *Preferred:*
+
   ```swift
   enum Environment {
   
@@ -1092,8 +1157,10 @@ final class ExperiencesViewController: UIViewController {
 
   This ensures that if someone adds a new value in the middle, they won't accidentally break things.
 
-	**Not preferred:**
-	
+  
+
+  *Not preferred:*
+
   ```swift
   enum ErrorType: String {
     case error = "error"
@@ -1123,10 +1190,10 @@ final class ExperiencesViewController: UIViewController {
     case timeOut
   }
   ```
-  
-	**Preferred:**
-  
-	```swift
+
+  *Preferred:*
+
+  ```swift
   enum ErrorType: String {
     case error
     case warning
@@ -1164,13 +1231,17 @@ final class ExperiencesViewController: UIViewController {
 
 * **Use optionals only when they have semantic meaning.**
 
+  
+
 * **Prefer immutable values whenever possible.** Use `map` and `compactMap` instead of appending to a new collection. Use `filter` instead of removing elements from a mutable collection.
 
   Mutable variables increase complexity, so try to keep them in as narrow a scope as possible.
 
-	**Not preferred:**
-	
-	```swift
+  
+
+  *Not preferred:*
+
+  ```swift
   var results = [SomeType]()
   for element in input {
     let result = transform(element)
@@ -1178,14 +1249,16 @@ final class ExperiencesViewController: UIViewController {
   }
   ```
 
-	**Preferred:**
-  
-	```swift
+  *Preferred:*
+
+  ```swift
   let results = input.map { transform($0) }
   ```
 
-	**Not preferred:**
-	
+  
+
+  *Not preferred:*
+
   ```swift
   var results = [SomeType]()
   for element in input {
@@ -1194,10 +1267,10 @@ final class ExperiencesViewController: UIViewController {
     }
   }
   ```
-  
-	**Preferred:**
 
-	```swift
+  *Preferred:*
+
+  ```swift
   let results = input.compactMap { transformThatReturnsAnOptional($0) }
   ```
 
@@ -1206,7 +1279,8 @@ final class ExperiencesViewController: UIViewController {
 * **Handle an unexpected but recoverable condition with an `assert` method combined with the appropriate logging in production. If the unexpected condition is not recoverable, prefer a `precondition` method or `fatalError()`.** This strikes a balance between crashing and providing insight into unexpected conditions in the wild. Only prefer `fatalError` over a `precondition` method when the failure message is dynamic, since a `precondition` method won't report the message in the crash report. [![SwiftLint: fatal_error_message](https://img.shields.io/badge/SwiftLint-fatal__error__message-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#fatal-error-message) [![SwiftLint: force_cast](https://img.shields.io/badge/SwiftLint-force__cast-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#force-cast) [![SwiftLint: force_try](https://img.shields.io/badge/SwiftLint-force__try-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#force-try) [![SwiftLint: force_unwrapping](https://img.shields.io/badge/SwiftLint-force__unwrapping-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#force-unwrapping)
 
   
-	**Preferred:**
+
+  *Preferred:*
 
   ```swift
   func didSubmitText(_ text: String) {
@@ -1240,17 +1314,19 @@ final class ExperiencesViewController: UIViewController {
 
   If a method needs to be overridden, the author should opt into that functionality by using the `class` keyword instead.
 
-	**Not preferred:**
-	
+  
+
+  *Not preferred:*
+
   ```swift
   class Fruit {
     class func eatFruits(_ fruits: [Fruit]) { ... }
   }
   ```
-  
-	**Preferred:**
-	
-	```swift
+
+  *Preferred:*
+
+  ```swift
   class Fruit {
     static func eatFruits(_ fruits: [Fruit]) { ... }
   }
@@ -1262,17 +1338,19 @@ final class ExperiencesViewController: UIViewController {
 
   If a class needs to be overridden, the author should opt into that functionality by omitting the `final` keyword.
 
-	**Not preferred:**
-	
+  
+
+  *Not preferred:*
+
   ```swift
   class SettingsRepository {
     // ...
   }
   ```
-  
-	**Preferred:**
-	
-	```swift
+
+  *Preferred:*
+
+  ```swift
   final class SettingsRepository {
     // ...
   }
@@ -1284,8 +1362,10 @@ final class ExperiencesViewController: UIViewController {
 
   Enumerating every case requires developers and reviewers have to consider the correctness of every switch statement when new cases are added.
 
-	**Not preferred:**
-	
+  
+
+  *Not preferred:*
+
   ```swift
   switch anEnum {
   case .a:
@@ -1294,9 +1374,9 @@ final class ExperiencesViewController: UIViewController {
     // Do something else.
   }
   ```
-  
-	**Preferred:**
-	
+
+  *Preferred:*
+
   ```swift
   switch anEnum {
   case .a:
@@ -1316,26 +1396,28 @@ final class ExperiencesViewController: UIViewController {
   #### Why?
 Checking for nil makes it immediately clear what the intent of the statement is. Optional binding is less explicit.
 
-	**Not preferred:**
 	
-  ```swift
-  var thing: Thing?
-
-	if let _ = thing {
-		doThing()
-  }
-  ```
+	
+  *Not preferred:*
   
-	**Preferred:**
-  
-  ```swift
+```swift
 	var thing: Thing?
+	
+  if let _ = thing {
+  	doThing()
+  }
+```
 
+  *Preferred:*
+	
+```swift
+  var thing: Thing?
+  
   if thing != nil {
     doThing()
   }
-  ```
-  
+```
+
   
 
 **[⬆ back to top](#table-of-contents)**
@@ -1352,7 +1434,7 @@ Checking for nil makes it immediately clear what the intent of the statement is.
   #### Why?
   A standard organization method helps engineers more quickly determine which modules a file depends on.
 
-  **Not preferred:**
+  *Not preferred:*
 
 ```swift
 //  Copyright © 2020 Checkfer Ltd. All rights reserved.
@@ -1364,7 +1446,7 @@ import Epoxy
 import Foundation
 ```
 
-  **Preferred:**
+  *Preferred:*
 
  ```swift
 //  Copyright © 2020 Checkfer Ltd. All rights reserved.
@@ -1380,7 +1462,7 @@ import Foundation
 
   _Exception: `@testable import` should be grouped after the regular import and separated by an empty line._
 
-  **Not preferred:**
+  *Not preferred:*
 
 ```swift
 //  Copyright © 2020 Checkfer Ltd. All rights reserved.
@@ -1393,7 +1475,7 @@ import Nimble
 import Quick
 ```
 
-  **Preferred:**
+  *Preferred:*
 
 ```swift
 //  Copyright © 2020 Checkfer Ltd. All rights reserved.
@@ -1416,6 +1498,8 @@ import Quick
 
 **[⬆ back to top](#table-of-contents)**
 
+
+
 ## Objective-C Interoperability
 
 <a id='prefer-pure-swift-classes'></a>(<a href='#prefer-pure-swift-classes'>quick-link</a>) 
@@ -1423,20 +1507,21 @@ import Quick
 * **Prefer pure Swift classes over subclasses of NSObject.** If your code needs to be used by some Objective-C code, wrap it to expose the desired functionality. Use `@objc` on individual methods and variables as necessary rather than exposing all API on a class to Objective-C via `@objcMembers`.
 
   
-	**Preferred:**
 	
+	*Preferred:*
+  
   ```swift
-  class PriceBreakdownViewController {
-
-    private let acceptButton = UIButton()
-
+class PriceBreakdownViewController {
+  
+  private let acceptButton = UIButton()
+  
     private func setUpAcceptButton() {
       acceptButton.addTarget(
         self,
         action: #selector(didTapAcceptButton),
         forControlEvents: .TouchUpInside)
-    }
-
+  }
+  
     @objc
     private func didTapAcceptButton() {
       // ...
@@ -1446,11 +1531,15 @@ import Quick
 
 **[⬆ back to top](#table-of-contents)**
 
+
+
 ## Contributors
 
   - [View Contributors](https://github.com/Checkfer-Limited/swift/graphs/contributors)
 
 **[⬆ back to top](#table-of-contents)**
+
+
 
 ## Amendments
 
