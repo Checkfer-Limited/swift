@@ -42,7 +42,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 * <a id='column-width'></a>(<a href='#column-width'>link</a>) **Each line should have a maximum column width of 100 characters.**
 
-  <details>
+  
+
 
   #### Why?
   Due to larger screen sizes, we have opted to choose a page guide greater than 80
