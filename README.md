@@ -964,6 +964,37 @@ There are specific scenarios where a backing a property or method could be easie
 	}
 	```
 
+* **Avoid force casting objects.** Avoid force casting objects into an expected object, make use of `guard` to unwrap the object correctly. SwiftLint will capture these. [![SwiftLint: fatal_error_message](https://img.shields.io/badge/SwiftLint-fatal__error__message-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#fatal-error-message) [![SwiftLint: force_cast]
+
+    *Not preferred:*
+	
+     ```swift
+   	class TextField {
+     	
+       	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            let cell = tableView.dequeueReusableCell(withIdentifier: Constant.Cells.SearchResultTableCell, for: indexPath) as! SearchResultTableCell
+            cell.selectionStyle = .none
+            cell.layoutIfNeeded()
+            return cell
+        }
+   	}
+   	```
+   	
+   	*Preferred:*
+	
+     ```swift
+   	class TextField {
+     	
+       	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: Constant.Cells.SearchResultTableCell,
+                for: indexPath) as? SearchResultTableCell else { return UITableViewCell() }
+            cell.selectionStyle = .none
+            cell.layoutIfNeeded()
+            return cell
+        }
+   	}
+   	```
   
 
 * **Avoid performing any meaningful or time-intensive work in `init()`.** Avoid doing things like opening database connections, making network requests, reading large amounts of data from disk, etc. Create something like a `start()` method if these things need to be done before an object is ready for use.

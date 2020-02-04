@@ -1,13 +1,16 @@
-disabled_rules: # rule identifiers to exclude from running
+# rule identifiers to exclude from running
+disabled_rules:
     - trailing_whitespace
-    - variable_name
-    - variable_name_min_length
+    - identifier_name
     - type_name
     - function_parameter_count
     - shorthand_operator
 
+# parameterized rules can be customized from this configuration file
+line_length: 220
+
+# paths to ignore during linting. Takes precedence over `included`.
 excluded:
-    - Carthage
     - Pods
 
 colon:
