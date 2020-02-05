@@ -23,6 +23,7 @@ Note that brevity is not a primary goal. Code should be made more concise only i
 
 ## Table of Contents
 
+1. [Project Guidelines](#project-guidelines)
 1. [Xcode Formatting](#xcode-formatting)
 1. [Naming](#naming)
 1. [Style](#style)
@@ -35,6 +36,16 @@ Note that brevity is not a primary goal. Code should be made more concise only i
 1. [Objective-C Interoperability](#objective-c-interoperability)
 1. [Contributors](#contributors)
 1. [Amendments](#amendments)
+
+
+##  Xcode Guidelines
+We strive to ensure that working as a team is made much easier by following a few guidelines to back reviewing, merging and working together a lesser task.
+
+* Ensure when working on features that Stroyboards are not used, we do not use storyboards to reduce conflicting codebases when working simultaneously.
+* When using third party libraries we use the Cocoapod Dependancy Manager, and this should be setup according to the spec provided by Cocoa. 
+  * Ensure that the /Pod folder is not commited to the repository, there should be an entry in the gitignore file.
+  * If at any point a library needs to be locked, add a comment to the project readme, format: podname / version locked / date / reason
+
 
 ## Xcode Formatting
 
@@ -144,7 +155,15 @@ There are specific scenarios where a backing a property or method could be easie
 
 * **Name booleans like `isSpaceship`, `hasSpacesuit`, etc.** This makes it clear that they are booleans and not other types.
 
+* **Name outlets like `lblTitle`, `btnAction`, `txtEmail`, etc.** This helps to keep consistency throughout the codebase, the beginning should be a 2/3 character identifier and the followed by something sensible and descriptive. Here are some examples:
   
+  ```swift
+  @IBOutlet weak var lblTitle: UILabel
+  @IBOutlet weak var btnAction: UIButton
+  @IBOutlet weak var txtEmailInput: UITextField
+  @IBOutlet weak var ctlOption: UIControl
+  @IBOutlet weak var vwCollection: UICollectionView
+  ```
 
 * **Acronyms in names (e.g. `URL`) should be all-caps except when it’s the start of a name that would otherwise be lowerCamelCase, in which case it should be uniformly lower-cased.**
 
@@ -885,7 +904,6 @@ There are specific scenarios where a backing a property or method could be easie
 	*Not preferred:*
 	  
 	```swift
-	// Wrong
 	class MyClass: NSObject {
 		//==================================================
 		// MARK: Properties
