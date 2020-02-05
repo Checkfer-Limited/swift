@@ -964,7 +964,7 @@ There are specific scenarios where a backing a property or method could be easie
 	}
 	```
 
-* **Avoid force casting objects.** Avoid force casting objects into an expected object, make use of `guard` to unwrap the object correctly. SwiftLint will capture these. [![SwiftLint: fatal_error_message](https://img.shields.io/badge/SwiftLint-fatal__error__message-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#fatal-error-message) [![SwiftLint: force_cast]
+* **Avoid force casting objects.** Avoid force casting objects into an expected object, make use of `guard` to unwrap the object correctly. SwiftLint will capture these. [![SwiftLint: fatal_error_message](https://img.shields.io/badge/SwiftLint-fatal__error__message-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#fatal-error-message) [![SwiftLint: force_cast](https://img.shields.io/badge/SwiftLint-force__cast-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#force-cast)
 
     *Not preferred:*
 	
