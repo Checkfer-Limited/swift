@@ -71,8 +71,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 * **Use PascalCase for type and protocol names, and lowerCamelCase for everything else.** [![SwiftLint: type_name](https://img.shields.io/badge/SwiftLint-type__name-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#type-name)
 
-  
-
   	```swift
 	protocol SpaceThing {
   		// ...
@@ -99,11 +97,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
   
 	let myFleet = SpaceFleet()
 	```
-  
 
 _Exception: You may prefix a private property with an underscore if it is backing an identically-named property or method with a higher access level_
-
-
 
 #### Why?
 There are specific scenarios where a backing a property or method could be easier to read than using a more descriptive name.
@@ -134,10 +129,7 @@ There are specific scenarios where a backing a property or method could be easie
 		
 	```
 
-
-
   - Backing a less specific type with a more specific type
-
 
 	```swift
 	final class ExperiencesViewController: UIViewController {
@@ -150,8 +142,6 @@ There are specific scenarios where a backing a property or method could be easie
 		
 	}
 	```
-
-
 
 * **Name booleans like `isSpaceship`, `hasSpacesuit`, etc.** This makes it clear that they are booleans and not other types.
 
@@ -166,8 +156,6 @@ There are specific scenarios where a backing a property or method could be easie
   ```
 
 * **Acronyms in names (e.g. `URL`) should be all-caps except when it’s the start of a name that would otherwise be lowerCamelCase, in which case it should be uniformly lower-cased.**
-
-  
 
 	*Not preferred:*
 
@@ -206,12 +194,8 @@ There are specific scenarios where a backing a property or method could be easie
 	let urlValidator = URLValidator()
 	let isProfile = urlValidator.isProfileUrl(urlToTest, userID: idOfUser)
 	```
-  
-  
 
 * **Names should be written with their most general part first and their most specific part last.** The meaning of "most general" depends on context, but should roughly mean "that which most helps you narrow down your search for the item you're looking for." Most importantly, be consistent with how you order the parts of your name.
-
-  
 
 	*Not preferred:*
 
@@ -231,11 +215,7 @@ There are specific scenarios where a backing a property or method could be easie
 	let bodyMarginLeft: CGFloat
 	```
 
-  
-
 * **Include a hint about type in a name if it would otherwise be ambiguous.**
-
-  
 
 	*Not preferred:*
 
@@ -251,11 +231,7 @@ There are specific scenarios where a backing a property or method could be easie
 	let cancelButton: UIButton
 	```
 
-  
-
 * **Event-handling functions should be named like past-tense sentences.** The subject can be omitted if it's not needed for clarity.
-
-  
 
 	*Not preferred:*
 
@@ -289,11 +265,7 @@ There are specific scenarios where a backing a property or method could be easie
 	}
 	```
 
-  
-
 * **Avoid Objective-C-style acronym prefixes.** This is no longer needed to avoid naming conflicts in Swift.
-
-  
 
 	*Not preferred:*
 
@@ -311,12 +283,9 @@ There are specific scenarios where a backing a property or method could be easie
 	}
 	```
 
-  
-
 * **Avoid `*Controller` in names of classes that aren't view controllers.**
 
   Controller is an overloaded suffix that doesn't provide information about the responsibilities of the class.
-
 
 **[⬆ back to top](#table-of-contents)**
 
@@ -326,7 +295,6 @@ There are specific scenarios where a backing a property or method could be easie
 
 * **Don't include types where they can be easily inferred.**
 
-  
 	*Not preferred:*
 	
 	```swift
@@ -366,11 +334,7 @@ There are specific scenarios where a backing a property or method could be easie
 	}
 	```
 
-  
-
 * **Don't use `self` unless it's necessary for disambiguation or required by the language.** [![SwiftFormat: redundantSelf](https://img.shields.io/badge/SwiftFormat-redundantSelf-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantSelf)
-
-  
 
 	*Not preferred:*
 	
@@ -414,11 +378,7 @@ There are specific scenarios where a backing a property or method could be easie
 	}
 	```
 
-  
-
 * **Bind to `self` when upgrading from a weak reference.** [![SwiftFormat: strongifiedSelf](https://img.shields.io/badge/SwiftFormat-strongifiedSelf-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#strongifiedSelf)
-
-  
 
 	*Not preferred:*
 	
@@ -452,11 +412,7 @@ There are specific scenarios where a backing a property or method could be easie
 	}
 	```
 
-  
-
 * **Add a trailing comma on the last element of a multi-line array.** [![SwiftFormat: trailingCommas](https://img.shields.io/badge/SwiftFormat-trailingCommas-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#trailingCommas)
-
-  
 
 	*Not preferred:*
 	
@@ -478,11 +434,7 @@ There are specific scenarios where a backing a property or method could be easie
 	]
 	```
 
-  
-
 * **Name members of tuples for extra clarity.** Rule of thumb: if you've got more than 3 fields, you should probably be using a struct.
-
-  
 
 	*Not preferred:*
 	
@@ -517,8 +469,6 @@ There are specific scenarios where a backing a property or method could be easie
   
 
 * **Place the colon immediately after an identifier, followed by a space.** [![SwiftLint: colon](https://img.shields.io/badge/SwiftLint-colon-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#colon)
-
-  
 
 	*Not preferred:*
 	
@@ -564,11 +514,7 @@ There are specific scenarios where a backing a property or method could be easie
 	var dict = [KeyType: ValueType]()
 	```
 
-  
-
 * **Place a space on either side of a return arrow for readability.** [![SwiftLint: return_arrow_whitespace](https://img.shields.io/badge/SwiftLint-return__arrow__whitespace-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#returning-whitespace)
-
-  
 
 	*Not preferred:*
 		
@@ -602,13 +548,9 @@ There are specific scenarios where a backing a property or method could be easie
 	func doSomething(completion: () -> Void) {
 		// ...
 	}
-	```
-
-  
+	``` 
 
 * **Omit unnecessary parentheses.** [![SwiftFormat: redundantParens](https://img.shields.io/badge/SwiftFormat-redundantParens-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantParens)
-
-  
 
 	*Not preferred:*
 	
@@ -628,11 +570,7 @@ There are specific scenarios where a backing a property or method could be easie
 	let squares = userCounts.map { $0 * $0 }
 	```
 
-  
-
 * **Omit enum associated values from case statements when all arguments are unlabeled.** [![SwiftLint: empty_enum_arguments](https://img.shields.io/badge/SwiftLint-empty__enum__arguments-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#empty-enum-arguments)
-
-  
 
 	*Not preferred:*
 	
@@ -656,12 +594,8 @@ There are specific scenarios where a backing a property or method could be easie
 	}
 	```
 
-  
-
 * **Use constructors instead of Make() functions for NSRange and others.** [![SwiftLint: legacy_constructor](https://img.shields.io/badge/SwiftLint-legacy__constructor-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-constructor)
 
-  
-	
 	*Not preferred:*
 	  
 	```swift
@@ -673,8 +607,6 @@ There are specific scenarios where a backing a property or method could be easie
 	```swift
 	let range = NSRange(location: 10, length: 5)
 	```
-  
-  
 
 ## Functions
 
@@ -682,8 +614,6 @@ There are specific scenarios where a backing a property or method could be easie
 
 * **Omit `Void` return types from function definitions.** [![SwiftLint: redundant_void_return](https://img.shields.io/badge/SwiftLint-redundant__void__return-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#redundant-void-return)
 
-  
-	
 	*Not preferred:*
 	  
 	```swift
@@ -699,16 +629,12 @@ There are specific scenarios where a backing a property or method could be easie
 		...
 	}
 	```
-  
-  
 
 ## Closures
 
 <a id='prefer-pure-swift-classes'></a>(<a href='#prefer-pure-swift-classes'>quick-link</a>) 
 
 * **Favor `Void` return types over `()` in closure declarations.** If you must specify a `Void` return type in a function declaration, use `Void` rather than `()` to improve readability. [![SwiftLint: void_return](https://img.shields.io/badge/SwiftLint-void__return-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#void-return)
-
-  
 
 	*Not preferred:*
 	
@@ -726,14 +652,10 @@ There are specific scenarios where a backing a property or method could be easie
 	}
 	```
 
-  
-
 * **Name unused closure parameters as underscores (`_`).** [![SwiftLint: unused_closure_parameter](https://img.shields.io/badge/SwiftLint-unused__closure__parameter-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#unused-closure-parameter)
 
     Naming unused closure parameters as underscores reduces the cognitive overhead required to read
     closures by making it obvious which parameters are used and which are unused.
-
-    
 
 	*Not preferred:*
 	
@@ -751,11 +673,7 @@ There are specific scenarios where a backing a property or method could be easie
 	}
 	```
 
-    
-
 * <a id='closure-brace-spacing'></a>(<a href='#closure-brace-spacing'>link</a>) **Single-line closures should have a space inside each brace.** [![SwiftLint: closure_spacing](https://img.shields.io/badge/SwiftLint-closure__spacing-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#closure-spacing)
-
-  
 	
 	*Not preferred:*
 		
@@ -768,8 +686,6 @@ There are specific scenarios where a backing a property or method could be easie
 	```swift
 	let evenSquares = numbers.filter { $0 % 2 == 0 }.map { $0 * $0 }
 	```
-  
-  
 
 ## Operators
 
@@ -777,8 +693,6 @@ There are specific scenarios where a backing a property or method could be easie
 
 * **Infix operators should have a single space on either side.** Prefer parenthesis to visually group statements with many operators rather than varying widths of whitespace. This rule does not apply to range operators (e.g. `1...3`) and postfix or prefix operators (e.g. `guest?` or `-1`). [![SwiftLint: operator_usage_whitespace](https://img.shields.io/badge/SwiftLint-operator__usage__whitespace-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#operator-usage-whitespace)
 
-  
-	
 	*Not preferred:*
 		
 	```swift
@@ -799,11 +713,7 @@ There are specific scenarios where a backing a property or method could be easie
 	let latitude = region.center.latitude - (region.span.latitudeDelta / 2.0)
 	```
   
-  
-
 **[⬆ back to top](#table-of-contents)**
-
-
 
 ## Formatting/Structure
 
@@ -811,8 +721,6 @@ There are specific scenarios where a backing a property or method could be easie
 
 * **Marking indicators should be used on all swift class files.** There should always be a distiguishable sections to the code and Markings to clearly identify each section, this should not just be functional marking but visual. 
 
-	
-	
 	*Not preferred:*
 	  
 	```swift
@@ -837,12 +745,8 @@ There are specific scenarios where a backing a property or method could be easie
 	  
 	}
 	```
-
-
 
 - **Code structure should be in a standardised order** There should always be a distiguishable flow to the code, this will help create readable code. 
-
-	
 	
 	*Not preferred:*
 	  
@@ -894,13 +798,9 @@ There are specific scenarios where a backing a property or method could be easie
 	  
 	}
 	```
-
-
 
 - **Enforced trailing new lines (code white-space)** There should be a necessary amount of new lines that creates better readability and structure to the code, spacing between markings, functions and helper code. White spacing should be used in single lines only. [![SwiftLint: implicitly_unwrapped_optional](https://img.shields.io/badge/SwiftLint-trailing__newline-007A87.svg)](https://realm.github.io/SwiftLint/trailing_newline.html)
 
-	
-  
 	*Not preferred:*
 	  
 	```swift
@@ -939,8 +839,6 @@ There are specific scenarios where a backing a property or method could be easie
 	  
 	}
 	```
-
-
 
 **[⬆ back to top](#table-of-contents)**
 
@@ -949,8 +847,6 @@ There are specific scenarios where a backing a property or method could be easie
 <a id='prefer-pure-swift-classes'></a>(<a href='#prefer-pure-swift-classes'>quick-link</a>) 
 
 * **Prefer initializing properties at `init` time whenever possible, rather than using implicitly unwrapped optionals.**  A notable exception is UIViewController's `view` property. [![SwiftLint: implicitly_unwrapped_optional](https://img.shields.io/badge/SwiftLint-implicitly__unwrapped__optional-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#implicitly-unwrapped-optional)
-
-  
 
 	*Not preferred:*
 	
@@ -1016,14 +912,9 @@ There are specific scenarios where a backing a property or method could be easie
       }
    	```
   
-
 * **Avoid performing any meaningful or time-intensive work in `init()`.** Avoid doing things like opening database connections, making network requests, reading large amounts of data from disk, etc. Create something like a `start()` method if these things need to be done before an object is ready for use.
 
-  
-
 * **Extract complex property observers into methods.** This reduces nestedness, separates side-effects from property declarations, and makes the usage of implicitly-passed parameters like `oldValue` explicit.
-
-  
 
 	*Not preferred:*
 	
@@ -1063,11 +954,7 @@ There are specific scenarios where a backing a property or method could be easie
 	}
 	```
 
-  
-
 * **Extract complex callback blocks into methods**. This limits the complexity introduced by weak-self in blocks and reduces nestedness. If you need to reference self in the method call, make use of `guard` to unwrap self for the duration of the callback.
-
-  
 
 	*Not preferred:*
 	
@@ -1106,21 +993,13 @@ There are specific scenarios where a backing a property or method could be easie
 	}
 	```
 
-  
-
 * **Prefer using `guard` at the beginning of a scope.**
 
   It's easier to reason about a block of code when all `guard` statements are grouped together at the top rather than intermixed with business logic.
 
-  
-
 * **Access control should be at the strictest level possible.** Prefer `public` to `open` and `private` to `fileprivate` unless you need that behavior.
 
-  
-
 * **Avoid global functions whenever possible.** Prefer methods within type definitions.
-
-  
 
 	*Not preferred:*
 
@@ -1151,11 +1030,7 @@ There are specific scenarios where a backing a property or method could be easie
 	}
 	```
 
-  
-
 * **Prefer putting constants in the top level of a file if they are `private`.** If they are `public` or `internal`, define them as static properties, for namespacing purposes.
-
-  
 
 	*Preferred:*
 	
@@ -1174,10 +1049,7 @@ There are specific scenarios where a backing a property or method could be easie
 	}
 	```
 
-  
-
 * **Use caseless `enum`s for organizing `public` or `internal` constants and functions into namespaces.** Avoid creating non-namespaced global constants and functions. Feel free to nest namespaces where it adds clarity. Caseless `enum`s work well as namespaces because they cannot be instantiated, which matches their intent.
-
   
 	*Preferred:*
 	
@@ -1194,8 +1066,6 @@ There are specific scenarios where a backing a property or method could be easie
     
 	}
 	```
-
-  
 
 * **Use Swift's automatic enum values unless they map to an external source.** Add a comment explaining why explicit values are defined. [![SwiftLint: redundant_string_enum_value](https://img.shields.io/badge/SwiftLint-redundant__string__enum__value-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#redundant-string-enum-value)
 
@@ -1274,10 +1144,7 @@ There are specific scenarios where a backing a property or method could be easie
 	}
 	```
 
-
 * **Use optionals only when they have semantic meaning.**
-
-  
 
 * **Prefer immutable values whenever possible.** Use `map` and `compactMap` instead of appending to a new collection. Use `filter` instead of removing elements from a mutable collection.
 
@@ -1320,11 +1187,7 @@ There are specific scenarios where a backing a property or method could be easie
 	let results = input.compactMap { transformThatReturnsAnOptional($0) }
 	```
 
-  
-
 * **Handle an unexpected but recoverable condition with an `assert` method combined with the appropriate logging in production. If the unexpected condition is not recoverable, prefer a `precondition` method or `fatalError()`.** This strikes a balance between crashing and providing insight into unexpected conditions in the wild. Only prefer `fatalError` over a `precondition` method when the failure message is dynamic, since a `precondition` method won't report the message in the crash report. [![SwiftLint: fatal_error_message](https://img.shields.io/badge/SwiftLint-fatal__error__message-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#fatal-error-message) [![SwiftLint: force_cast](https://img.shields.io/badge/SwiftLint-force__cast-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#force-cast) [![SwiftLint: force_try](https://img.shields.io/badge/SwiftLint-force__try-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#force-try) [![SwiftLint: force_unwrapping](https://img.shields.io/badge/SwiftLint-force__unwrapping-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#force-unwrapping)
-
-  
 
   *Preferred:*
 
@@ -1354,8 +1217,6 @@ There are specific scenarios where a backing a property or method could be easie
   }
   ```
 
-  
-
 * **Default type methods to `static`.**
 
 	If a method needs to be overridden, the author should opt into that functionality by using the `class` keyword instead.
@@ -1376,8 +1237,6 @@ There are specific scenarios where a backing a property or method could be easie
 		static func eatFruits(_ fruits: [Fruit]) { ... }
 	}
 	```
-
-  
 
 * **Default classes to `final`.**
 
@@ -1401,13 +1260,9 @@ There are specific scenarios where a backing a property or method could be easie
 	}
 	```
 
-  
-
 * **Never use the `default` case when `switch`ing over an enum.**
 
 	Enumerating every case requires developers and reviewers have to consider the correctness of every switch statement when new cases are added.
-
-  
 
 	*Not preferred:*
 	
@@ -1431,14 +1286,10 @@ There are specific scenarios where a backing a property or method could be easie
 	}
 	```
 
-  
-
 * **Check for nil rather than using optional binding if you don't need to use the value.** [![SwiftLint: unused_optional_binding](https://img.shields.io/badge/SwiftLint-unused_optional_binding-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#unused-optional-binding)
 
 	#### Why?
 	Checking for nil makes it immediately clear what the intent of the statement is. Optional binding is less explicit.
-
-	
 	
 	*Not preferred:*
   
@@ -1459,9 +1310,7 @@ There are specific scenarios where a backing a property or method could be easie
 		doThing()
 	}
 	```
-  
-  
-
+ 
 **[⬆ back to top](#table-of-contents)**
 
 # File Organization
@@ -1527,23 +1376,17 @@ There are specific scenarios where a backing a property or method could be easie
 	@testable import Epoxy
 	```
 
-
-
 * **Limit empty vertical whitespace to one line.** Favor the following formatting guidelines over whitespace of varying heights to divide files into logical groupings. [![SwiftLint: vertical_whitespace](https://img.shields.io/badge/SwiftLint-vertical__whitespace-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#vertical-whitespace)
 
 * **Files should end in a newline.** [![SwiftLint: trailing_newline](https://img.shields.io/badge/SwiftLint-trailing__newline-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#trailing-newline)
 
 **[⬆ back to top](#table-of-contents)**
 
-
-
 ## Objective-C Interoperability
 
 <a id='prefer-pure-swift-classes'></a>(<a href='#prefer-pure-swift-classes'>quick-link</a>) 
 
 * **Prefer pure Swift classes over subclasses of NSObject.** If your code needs to be used by some Objective-C code, wrap it to expose the desired functionality. Use `@objc` on individual methods and variables as necessary rather than exposing all API on a class to Objective-C via `@objcMembers`.
-
-  
 	
 	*Preferred:*
   
@@ -1568,15 +1411,11 @@ There are specific scenarios where a backing a property or method could be easie
 
 **[⬆ back to top](#table-of-contents)**
 
-
-
 ## Contributors
 
   - [View Contributors](https://github.com/Checkfer-Limited/swift/graphs/contributors)
 
 **[⬆ back to top](#table-of-contents)**
-
-
 
 ## Amendments
 
