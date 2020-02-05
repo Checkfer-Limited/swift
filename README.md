@@ -969,31 +969,33 @@ There are specific scenarios where a backing a property or method could be easie
     *Not preferred:*
 	
      ```swift
-   	class TextField {
+      class TextField {
      	
-       	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell = tableView.dequeueReusableCell(withIdentifier: Constant.Cells.SearchResultTableCell, for: indexPath) as! SearchResultTableCell
-            cell.selectionStyle = .none
-            cell.layoutIfNeeded()
-            return cell
-        }
-   	}
+          func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+              let cell = tableView.dequeueReusableCell(withIdentifier: Constant.Cells.SearchResultTableCell, for: indexPath) as! SearchResultTableCell
+              cell.selectionStyle = .none
+              cell.layoutIfNeeded()
+              return cell
+          }
+          
+      }
    	```
    	
    	*Preferred:*
 	
      ```swift
-   	class TextField {
-     	
-       	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: Constant.Cells.SearchResultTableCell,
-                for: indexPath) as? SearchResultTableCell else { return UITableViewCell() }
-            cell.selectionStyle = .none
-            cell.layoutIfNeeded()
-            return cell
-        }
-   	}
+      class TextField {
+      
+          func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+              guard let cell = tableView.dequeueReusableCell(
+                  withIdentifier: Constant.Cells.SearchResultTableCell,
+                  for: indexPath) as? SearchResultTableCell else { return UITableViewCell() }
+              cell.selectionStyle = .none
+              cell.layoutIfNeeded()
+              return cell
+          }
+          
+      }
    	```
   
 
