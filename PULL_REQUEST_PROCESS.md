@@ -66,8 +66,18 @@ As mentioned in the [Swift Style Guide](https://github.com/Checkfer-Limited/swif
   @IBOutlet weak var btnAction: UIButton
   @IBOutlet weak var txtEmailInput: UITextField
   @IBOutlet weak var ctlOption: UIControl
-  @IBOutlet weak var vwCollection: UICollectionView
   ```
+
+Views, `UIView`, `UITableView`... should follow `<ViewName>View`:
+
+```swift
+ @IBOutlet weak var tableView: UITableView
+ @IBOutlet weak var collectionView: UICollectionView
+```
+
+Functions should follow Swift standards and should not contain `with` before the parameter, `func reload(withSection section: Int? = nil)` this is an objc trait. Functions should follow this standard:
+
+`func reload(section: Int? = nil)`
 
 ### Constants
 
